@@ -1,1 +1,124 @@
-var SnippetLogin=function(){var e=$("#m_login"),i=function(e,i,a){var l=$('<div class="m-alert m-alert--outline alert alert-'+i+' alert-dismissible" role="alert">\t\t\t<button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>\t\t\t<span></span>\t\t</div>');e.find(".alert").remove(),l.prependTo(e),mUtil.animateClass(l[0],"fadeIn animated"),l.find("span").html(a)},a=function(){e.removeClass("m-login--forget-password"),e.removeClass("m-login--signup"),e.addClass("m-login--signin"),mUtil.animateClass(e.find(".m-login__signin")[0],"flipInX animated")},l=function(){$("#m_login_forget_password").click(function(i){i.preventDefault(),e.removeClass("m-login--signin"),e.removeClass("m-login--signup"),e.addClass("m-login--forget-password"),mUtil.animateClass(e.find(".m-login__forget-password")[0],"flipInX animated")}),$("#m_login_forget_password_cancel").click(function(e){e.preventDefault(),a()}),$("#m_login_signup").click(function(i){i.preventDefault(),e.removeClass("m-login--forget-password"),e.removeClass("m-login--signin"),e.addClass("m-login--signup"),mUtil.animateClass(e.find(".m-login__signup")[0],"flipInX animated")}),$("#m_login_signup_cancel").click(function(e){e.preventDefault(),a()})};return{init:function(){l(),$("#m_login_signin_submit").click(function(e){e.preventDefault();var a=$(this),l=$(this).closest("form");l.validate({rules:{email:{required:!0,email:!0},password:{required:!0}}}),l.valid()&&(a.addClass("m-loader m-loader--right m-loader--light").attr("disabled",!0),l.ajaxSubmit({url:"",success:function(e,t,r,s){setTimeout(function(){a.removeClass("m-loader m-loader--right m-loader--light").attr("disabled",!1),i(l,"danger","Incorrect username or password. Please try again.")},2e3)}}))}),$("#m_login_signup_submit").click(function(l){l.preventDefault();var t=$(this),r=$(this).closest("form");r.validate({rules:{fullname:{required:!0},email:{required:!0,email:!0},password:{required:!0},rpassword:{required:!0},agree:{required:!0}}}),r.valid()&&(t.addClass("m-loader m-loader--right m-loader--light").attr("disabled",!0),r.ajaxSubmit({url:"",success:function(l,s,n,o){setTimeout(function(){t.removeClass("m-loader m-loader--right m-loader--light").attr("disabled",!1),r.clearForm(),r.validate().resetForm(),a();var l=e.find(".m-login__signin form");l.clearForm(),l.validate().resetForm(),i(l,"success","Thank you. To complete your registration please check your email.")},2e3)}}))}),$("#m_login_forget_password_submit").click(function(l){l.preventDefault();var t=$(this),r=$(this).closest("form");r.validate({rules:{email:{required:!0,email:!0}}}),r.valid()&&(t.addClass("m-loader m-loader--right m-loader--light").attr("disabled",!0),r.ajaxSubmit({url:"",success:function(l,s,n,o){setTimeout(function(){t.removeClass("m-loader m-loader--right m-loader--light").attr("disabled",!1),r.clearForm(),r.validate().resetForm(),a();var l=e.find(".m-login__signin form");l.clearForm(),l.validate().resetForm(),i(l,"success","Cool! Password recovery instruction has been sent to your email.")},2e3)}}))})}}}();jQuery(document).ready(function(){SnippetLogin.init()});
+const SnippetLogin = function () {
+
+    const login = $('#m_login');
+
+    const showErrorMsg = function (form, type, msg) {
+        const alert = $('<div class="m-alert m-alert--outline alert alert-' + type + ' alert-dismissible" role="alert">\
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>\
+			<span></span>\
+		</div>');
+
+        form.find('.alert').remove();
+        alert.prependTo(form);
+        //alert.animateClass('fadeIn animated');
+        mUtil.animateClass(alert[0], 'fadeIn animated');
+        alert.find('span').html(msg);
+    };
+
+    //== Private Functions
+
+    const displayUsageForm = function () {
+        login.removeClass('m-login--forget-password');
+        login.removeClass('m-login--signin');
+
+        login.addClass('m-login--usage');
+        mUtil.animateClass(login.find('.m-login__usage')[0], 'flipInX animated');
+    };
+
+    const displaySignInForm = function () {
+        login.removeClass('m-login--forget-password');
+        login.removeClass('m-login--usage');
+
+        login.addClass('m-login--signin');
+        mUtil.animateClass(login.find('.m-login__signin')[0], 'flipInX animated');
+        //login.find('.m-login__signin').animateClass('flipInX animated');
+    };
+
+    const displayForgetPasswordForm = function () {
+        login.removeClass('m-login--signin');
+        login.removeClass('m-login--usage');
+
+        login.addClass('m-login--forget-password');
+        //login.find('.m-login__forget-password').animateClass('flipInX animated');
+        mUtil.animateClass(login.find('.m-login__forget-password')[0], 'flipInX animated');
+
+    };
+
+    const handleFormSwitch = function () {
+        $('#m_login_forget_password').click(function (e) {
+            e.preventDefault();
+            displayForgetPasswordForm();
+        });
+
+        $('#m_login_forget_password_cancel').click(function (e) {
+            e.preventDefault();
+            displaySignInForm();
+        });
+
+        $('#m_login_usage').click(function (e) {
+            e.preventDefault();
+            displayUsageForm();
+        });
+
+        $('#m_login_usage_cancel').click(function (e) {
+            e.preventDefault();
+            displaySignInForm();
+        });
+    };
+
+    const handleSignInFormSubmit = function () {
+        $('#m_login_signin_submit').click(function (e) {
+            e.preventDefault();
+            const btn = $(this);
+            const form = $(this).closest('form');
+
+            form.validate({
+                rules: {
+                    username: {
+                        required: true,
+                    },
+                    password: {
+                        required: true
+                    }
+                }
+            });
+
+            if (!form.valid()) {
+                return;
+            }
+
+            btn.addClass('m-loader m-loader--right m-loader--light').attr('disabled', true);
+
+            form.ajaxSubmit({
+                url: '/api/check',
+                success: function (response, status, xhr, $form) {
+                    // similate 2s delay
+                    if (response['info'] === -1) {
+                        setTimeout(function () {
+                            btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
+                            showErrorMsg(form, 'danger', 'Incorrect username or password.');
+                        }, 2000);
+                        return;
+                    }
+                    if ($form.find('input[name="remember"]').get(0).checked) {
+                        document.cookie = "up=" + response['info'] + "; expires=Fri, 31 Dec 9999 23:59:59 GMT";
+                    } else {
+                        document.cookie = "up=" + response['info'];
+                    }
+                    // TODO jump back
+                }
+            });
+        });
+    };
+
+    return {
+        init: function () {
+            handleFormSwitch();
+            handleSignInFormSubmit();
+        }
+    };
+}();
+
+jQuery(document).ready(function () {
+    SnippetLogin.init();
+});
