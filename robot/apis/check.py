@@ -1,4 +1,5 @@
 import json
+import binascii
 from django.http import HttpResponse
 from django.conf import settings
 from robot.lib.AoxiangRobot.functions import AoxiangInfo
@@ -16,5 +17,26 @@ def check(request):
     return HttpResponse(json.dumps({'info': res}), content_type='application/json')
 
 
+def username_password(up):
+    try:
+        res = AES(settings.SECRET_KEY).decrypt(up)
+        return res[0:10], res[10:]
+    except (binascii.Error, ValueError):
+        return None
+
+
 def check_cookies(request):
-    pass
+    up = request.COOKIES.get('up')
+    if up is None:
+        return HttpResponse(json.dumps({'success': 0}), content_type='application/json')
+    res = username_password(up)
+    if res is None:
+        return HttpResponse(json.dumps({'success': 0}), content_type='application/json')
+
+    try:
+        AoxiangInfo.check(*res)
+        return HttpResponse(json.dumps({'success': 1}), content_type='application/json')
+    except ValueError:
+        return HttpResponse(json.dumps({'success': 0}), content_type='application/json')
+
+
