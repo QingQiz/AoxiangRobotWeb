@@ -1,10 +1,11 @@
 from django.urls import path
-from robot.views import index, login, status
+from robot.views import index, login, error
 from robot.apis import check, get
 
 urlpatterns = [
     path('', index.index, name='Home'),
-    path('status/404', status.h404, name='404'),
+    path('error', error.error, name="Error"),
+
     path('action/login', login.login, name='Login'),
 
     path('api/check', check.check, name='Check'),

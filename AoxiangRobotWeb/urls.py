@@ -14,7 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path, include
+from robot.views import error
 
 urlpatterns = [
     path('', include('robot.urls'))
 ]
+
+handler404 = error.e404
+handler500 = error.e500
+handler403 = error.e403
+handler400 = error.e400
