@@ -100,13 +100,12 @@ const SnippetLogin = function () {
                         }, 2000);
                         return;
                     }
-                    document.cookie = "up=";
                     if ($form.find('input[name="remember"]').get(0).checked) {
-                        document.cookie = "up=" + response['info'] + "; expires=Fri, 31 Dec 9999 23:59:59 GMT";
+                        document.cookie = "up=" + response['info'] + "; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
                     } else {
-                        document.cookie = "up=" + response['info'];
+                        document.cookie = "up=" + response['info'] + '; path=/';
                     }
-                    // TODO jump back
+                    location.reload();
                 }
             });
         });
