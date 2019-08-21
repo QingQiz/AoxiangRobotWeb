@@ -11,10 +11,15 @@ let GradeAddTerm = function () {
                     GradeData.init();
                 } else {
                     let box = table.find('#table__' + y + '_' + t);
-                    box.addClass('fadeOut animated delay-1s');
-                    setTimeout(function () {
+                    box.animate({
+                        opacity: 0
+                    }, 500);
+                    box.animate({
+                        height: 0,
+                        marginTop: 0
+                    }, 700, function () {
                         box.remove();
-                    }, 1100);
+                    });
                 }
             });
         };
@@ -74,13 +79,11 @@ let GradeAddTerm = function () {
                             <li class="m-portlet__nav-item">
                                 <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push"
                                      m-dropdown-toggle="hover" aria-expanded="true">
-                                    <a href="#"
-                                       class="m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn--icon m-btn--icon-only m-btn--pill  m-dropdown__toggle">
+                                    <a href="#" class="m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn--icon m-btn--icon-only m-btn--pill  m-dropdown__toggle">
                                         <i class="la la-ellipsis-h m--font-brand"></i>
                                     </a>
                                     <div class="m-dropdown__wrapper" style="z-index: 101;">
-                                        <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"
-                                              style="left: auto; right: 21.5px;"></span>
+                                        <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust" style="left: auto; right: 21.5px;"></span>
                                         <div class="m-dropdown__inner">
                                             <div class="m-dropdown__body">
                                                 <div class="m-dropdown__content">
@@ -122,10 +125,10 @@ let GradeAddTerm = function () {
                     </div>
                 </div>
                 <div class="m-portlet__body">
-                    <div class="m_datatable" year="` + (year % 100) + `" term="` + term + `"></div>
+                    <div class="m_datatable" year="` + (year % 100) + `" term="` + term + `">
+                    </div>
                 </div>
             </div>
-        
         `);
     };
     return {

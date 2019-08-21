@@ -59,6 +59,7 @@ let GradeDataForm = function (year, term) {
         }, {
             field: "name",
             title: "Name",
+            width: '140px',
             sortable: 'asc',
             textAlign: 'left',
             template: function (row) {
@@ -86,6 +87,7 @@ let GradeDataForm = function (year, term) {
         }, {
             field: "credit",
             title: "学分",
+            width: '30px',
             textAlign: "center",
             template: function (row) {
                 return `<span style="font-size: 1.1rem">` + row.credit + `</span>`;
@@ -162,6 +164,7 @@ let GradeDataForm = function (year, term) {
         }, {
             field: "GP",
             title: "绩点",
+            width: '30px',
             textAlign: "center",
             template: function (row) {
                 return `<span style="font-size: 1.1rem">` + row.GP + `</span>`;
