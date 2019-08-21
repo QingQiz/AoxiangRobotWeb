@@ -1,4 +1,29 @@
 let GradeDataForm = function (year, term) {
+    let status_template = function(row, field) {
+        if (row[field] === null) return '';
+        let status;
+        let grade = parseFloat(row[field]);
+        if (!isNaN(grade)) {
+            if (grade < 60) {
+                status = 'danger';
+            } else if (grade < 80) {
+                status = 'warning';
+            } else if (grade < 90) {
+                status = 'accent';
+            } else {
+                status = 'success';
+            }
+        } else {
+            if (row[field] === 'P') status = 'success';
+            else status = 'secondary';
+        }
+        return `
+            <span style="width: 110px;">
+                <span class="m--font-bold m--font-` + status + `" style="font-size: 1.3rem">
+                    ` + row[field] + `
+                </span>
+            </span>`;
+    };
     return {
         data: {
             type: 'remote',
@@ -7,10 +32,10 @@ let GradeDataForm = function (year, term) {
         },
 
         layout: {
-            theme: 'default', // datatable theme
-            class: '', // custom wrapper class
-            scroll: false, // enable/disable datatable scroll both horizontal and vertical when needed.
-            footer: false // display/hide footer
+            theme: 'default',
+            class: '',
+            scroll: false,
+            footer: false
         },
 
         sortable: true,
@@ -34,44 +59,113 @@ let GradeDataForm = function (year, term) {
         }, {
             field: "name",
             title: "Name",
-            textAlign: 'left'
+            sortable: 'asc',
+            textAlign: 'left',
+            template: function (row) {
+                let name = row.name;
+                let index = name.indexOf('实验');
+                if (index !== -1) {
+                    return `
+                        <span style="width: 110px;">
+                            <span style="font-size: 1rem">
+                                ` + name.slice(0, index) + `
+                            </span>
+                            <span class="m--font-bold m--font-success" style="font-size: 1rem">
+                                实验
+                            </span>
+                            <span style="font-size: 1rem">
+                                ` + name.slice(index + 2) + `
+                            </span>
+                        </span>`;
+                } else {
+                    return `
+                        <span style="width: 110px;"><span style="font-size: 1rem">` + name + `</span></span>
+                    `
+                }
+            }
         }, {
             field: "credit",
-            title: "学分"
+            title: "学分",
+            textAlign: "center",
+            template: function (row) {
+                return `<span style="font-size: 1.1rem">` + row.credit + `</span>`;
+            }
         }, {
             field: "usual",
-            title: "平时成绩"
+            title: "平时成绩",
+            textAlign: "center",
+            template: function (row) {
+                return status_template(row, 'usual');
+            }
         }, {
             field: "midTerm",
             title: "期中成绩",
+            textAlign: "center",
+            template: function (row) {
+                return status_template(row, 'midTerm');
+            }
         }, {
             field: "experimental",
             title: "实验成绩",
+            textAlign: "center",
+            template: function (row) {
+                return status_template(row, 'experimental');
+            }
         }, {
             field: "endTerm",
             title: "期末成绩",
+            textAlign: "center",
+            template: function (row) {
+                return status_template(row, 'endTerm');
+            }
         }, {
             field: "makeUp",
-            title: "补考成绩"
+            title: "补考成绩",
+            textAlign: "center",
+            template: function (row) {
+                return status_template(row, 'makeUp');
+            }
         }, {
             field: "total",
             title: "总评成绩",
-            // template: function (row) {
-            //     let status = {
-            //     };
-            //     return '<span class="m-badge ' + status[row.Status].class + ' m-badge--wide">' + status[row.Status].title + '</span>';
-            // }
+            textAlign: "center",
+            template: function (row) {
+                return status_template(row, 'total');
+            }
         }, {
             field: "final",
             title: "最终",
-            // template: function (row) {
-            //     let status = {
-            //     };
-            //     return '<span class="m-badge m-badge--' + status[row.Type].state + ' m-badge--dot"></span>&nbsp;<span class="m--font-bold m--font-' + status[row.Type].state + '">' + status[row.Type].title + '</span>';
-            // }
+            textAlign: "center",
+            template: function (row) {
+                let status;
+                let grade = parseFloat(row.final);
+                if (!isNaN(grade)) {
+                    if (grade < 60) {
+                        status = 'danger';
+                    } else if (grade < 80) {
+                        status = 'warning';
+                    } else if (grade < 90) {
+                        status = 'accent';
+                    } else {
+                        status = 'success';
+                    }
+                } else {
+                    if (row.final === 'P') status = 'success';
+                    else status = 'secondary';
+                }
+
+                return `
+                    <span style="width: 110px;">
+                        <span class="m-badge m-badge--` + status + ` m-badge--wide" style="font-size: 1.3rem;">` + row.final + `</span>
+                    </span>`;
+            }
         }, {
             field: "GP",
-            title: "绩点"
+            title: "绩点",
+            textAlign: "center",
+            template: function (row) {
+                return `<span style="font-size: 1.1rem">` + row.GP + `</span>`;
+            }
         }, {
             field: "Actions",
             width: 110,
