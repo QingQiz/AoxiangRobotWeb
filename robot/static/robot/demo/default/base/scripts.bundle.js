@@ -693,7 +693,8 @@ $(document).ready(function () {
                                         var r = t("<label/>").addClass("m-checkbox m-checkbox--single").append(t("<input/>").attr("type", "checkbox").attr("value", l).on("click", function () {
                                             t(this).is(":checked") ? n.setActive(this) : n.setInactive(this)
                                         })).append(t("<span/>"));
-                                        void 0 !== i.selector.class && t(r).addClass(i.selector.class), t(a).children().html(r)
+                                        void 0 !== i.selector.class && t(r).addClass(i.selector.class), t(a).children().html(r);
+                                        if (i.selector.checked === true) t(r).find('input').attr('checked', '1');
                                     }
                                     if (void 0 !== i.subtable && i.subtable) {
                                         if (t(a).find(".m-datatable__toggle-subtable").length > 0) return;
@@ -713,7 +714,8 @@ $(document).ready(function () {
                                 var l = t("<label/>").addClass("m-checkbox m-checkbox--single m-checkbox--all").append(t("<input/>").attr("type", "checkbox").on("click", function () {
                                     t(this).is(":checked") ? n.setActiveAll(!0) : n.setActiveAll(!1)
                                 })).append(t("<span/>"));
-                                void 0 !== a.selector.class && t(l).addClass(a.selector.class), t(i).children().html(l)
+                                void 0 !== a.selector.class && t(l).addClass(a.selector.class), t(i).children().html(l);
+                                if (a.selector.checked === true) t(l).find('input').attr('checked', '1');
                             }
                         };
                         e.layout.header && i(t(a.tableHead).find(".m-datatable__row").first()), e.layout.footer && i(t(a.tableFoot).find(".m-datatable__row").first())
