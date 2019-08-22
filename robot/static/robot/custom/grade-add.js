@@ -59,7 +59,11 @@ let GradeAddTerm = function () {
             toggle_table(c_y, 0);
             toggle_table(c_y, 1);
         }
-        add.find('#cb__' + (year - 1) + '_0').attr('checked', 'checked');
+        if (new Date().getMonth() > 3) {
+            add.find('#cb__' + (year - 1) + '_1').attr('checked', 'checked');
+        } else {
+            add.find('#cb__' + (year - 1) + '_0').attr('checked', 'checked');
+        }
     };
 
     let init_data_table = function (year, term) {
@@ -143,6 +147,10 @@ let GradeAddTerm = function () {
 
 jQuery(document).ready(function () {
     GradeAddTerm.init_add_menu();
-    GradeAddTerm.init_data_table(new Date().getFullYear() - 1, 0);
+    if (new Date().getMonth() > 3) {
+        GradeAddTerm.init_data_table(new Date().getFullYear() - 1, 1);
+    } else {
+        GradeAddTerm.init_data_table(new Date().getFullYear() - 1, 0);
+    }
     GradeData.init();
 });
