@@ -98,23 +98,10 @@ let GradeAddTerm = function () {
                                                             </span>
                                                         </li>
                                                         <li class="m-nav__item">
-                                                            <a href="" class="m-nav__link">
-                                                                <i class="m-nav__link-icon flaticon-share"></i>
+                                                            <a href="#" class="m-nav__link" id="rm__table_` + year + '_' + term + `">
+                                                                <i class="m-nav__link-icon flaticon-delete-1"></i>
                                                                 <span class="m-nav__link-text">
-                                                                    Ӽ�Kƿ'
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="m-nav__section">
-                                                            <span class="m-nav__section-text">
-                                                                f�]�
-                                                            </span>
-                                                        </li>
-                                                        <li class="m-nav__item">
-                                                            <a href="" class="m-nav__link">
-                                                                <i class="m-nav__link-icon flaticon-info"></i>
-                                                                <span class="m-nav__link-text">
-                                                                    M�t�
+                                                                    Remove This Table
                                                                 </span>
                                                             </a>
                                                         </li>
@@ -134,6 +121,9 @@ let GradeAddTerm = function () {
                 </div>
             </div>
         `);
+        table.find('#rm__table_' + year + '_' + term).click(function () {
+            add.find('#cb__' + year + '_' + term).click();
+        })
     };
     return {
         init_add_menu: function () {
