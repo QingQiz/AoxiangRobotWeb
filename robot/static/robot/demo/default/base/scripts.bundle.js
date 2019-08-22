@@ -3037,6 +3037,7 @@ $(document).ready(function () {
 				if (typeof params.query === 'object' && !Plugin.getOption('data.serverFiltering')) {
 					params.query = params.query || {};
 
+                    /*
 					var nestedSearch = function(obj) {
 						for (var field in obj) {
 							if (!obj.hasOwnProperty(field)) continue;
@@ -3060,6 +3061,7 @@ $(document).ready(function () {
 						// remove generalSearch as we don't need this for next columns filter
 						delete params.query[Plugin.getGeneralSearchKey()];
 					}
+					*/
 
 					// remove empty element from array
 					$.each(params.query, function(k, v) {
@@ -3112,17 +3114,36 @@ $(document).ready(function () {
 
 				$.each(list, function(key, obj) {
 					var to_match = obj;
-
 					var matched = 0;
-					$.each(args, function(m_key, m_value) {
-						m_value = m_value instanceof Array ? m_value : [m_value];
-						if (m_key === '') {
-						    let m_index = {};
-						    for (let i in m_value[1]) m_index[i] = m_value[1][i];
-                            for (let i in m_index) {
-						        m_index[i] = to_match[m_index[i]];
+					for (let m_key in args) {
+					    let m_value = args[m_key];
+                        m_value = m_value instanceof Array ? m_value : [m_value];
+                        if (m_key === '') {
+                            if (typeof m_value[0] === "function") {
+                                let m_index = {};
+                                for (let i in m_value[1]) m_index[i] = m_value[1][i];
+                                for (let i in m_index) {
+                                    m_index[i] = to_match[m_index[i]];
+                                }
+                                if (m_value[0](m_index)) {
+                                    matched++;
+                                }
                             }
-						    if (m_value[0](m_index)) matched++;
+                        } else if (m_key === 'search') {
+                            for (let k in to_match) {
+                                let flg = false;
+                                let aim = to_match[k];
+                                if (aim === null) continue;
+                                for (let key in m_value) {
+                                    let crt = m_value[key].toLowerCase();
+                                    if (aim === crt || aim.indexOf(crt) !== -1) {
+                                        matched++;
+                                        flg = true;
+                                        break;
+                                    }
+                                }
+                                if (flg) break;
+                            }
                         } else {
                             if (to_match.hasOwnProperty(m_key)) {
                                 var lhs = to_match[m_key].toString().toLowerCase();
@@ -3136,11 +3157,10 @@ $(document).ready(function () {
                                     }
                                 });
                             }
-
                         }
-					});
+                    };
 
-					if (('AND' === operator && matched === count) ||
+					if (('AND' === operator && matched >= count) ||
 						('OR' === operator && matched > 0) ||
 						('NOT' === operator && 0 === matched)) {
 						filtered[key] = obj;
@@ -3583,7 +3603,11 @@ $(document).ready(function () {
 
 					// search not by columns
 					if (typeof columns === 'undefined' && typeof value !== 'undefined') {
-						query[''] = value;
+					    if (typeof value[0] === "function") {
+                            query[''] = value;
+                        } else {
+					        query['search'] = value;
+                        }
 					}
 
 

@@ -59,7 +59,7 @@ let GradeDataForm = function (year, term) {
         }, {
             field: "name",
             title: "Name",
-            width: '160px',
+            width: '180px',
             sortable: 'asc',
             textAlign: 'left',
             template: function (row) {
@@ -176,7 +176,7 @@ let GradeDataForm = function (year, term) {
             template: function (row) {
                 return `<span style="font-size: 1.1rem">` + row.GP + `</span>`;
             }
-        }, {
+        }/*, {
             field: "Actions",
             width: 110,
             title: "Actions",
@@ -202,6 +202,6 @@ let GradeDataForm = function (year, term) {
                         <i class="la la-cog"></i>
                     </a>`;
             }
-        }]
+        }*/]
     }
 };
