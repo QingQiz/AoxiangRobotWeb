@@ -59,7 +59,7 @@ let GradeDataForm = function (year, term) {
         }, {
             field: "name",
             title: "Name",
-            width: '140px',
+            width: '160px',
             sortable: 'asc',
             textAlign: 'left',
             template: function (row) {
@@ -95,6 +95,7 @@ let GradeDataForm = function (year, term) {
         }, {
             field: "usual",
             title: "平时成绩",
+            width: '80px',
             textAlign: "center",
             template: function (row) {
                 return status_template(row, 'usual');
@@ -102,6 +103,7 @@ let GradeDataForm = function (year, term) {
         }, {
             field: "midTerm",
             title: "期中成绩",
+            width: '80px',
             textAlign: "center",
             template: function (row) {
                 return status_template(row, 'midTerm');
@@ -109,6 +111,7 @@ let GradeDataForm = function (year, term) {
         }, {
             field: "experimental",
             title: "实验成绩",
+            width: '80px',
             textAlign: "center",
             template: function (row) {
                 return status_template(row, 'experimental');
@@ -116,6 +119,7 @@ let GradeDataForm = function (year, term) {
         }, {
             field: "endTerm",
             title: "期末成绩",
+            width: '80px',
             textAlign: "center",
             template: function (row) {
                 return status_template(row, 'endTerm');
@@ -123,6 +127,7 @@ let GradeDataForm = function (year, term) {
         }, {
             field: "makeUp",
             title: "补考成绩",
+            width: '80px',
             textAlign: "center",
             template: function (row) {
                 return status_template(row, 'makeUp');
@@ -130,6 +135,7 @@ let GradeDataForm = function (year, term) {
         }, {
             field: "total",
             title: "总评成绩",
+            width: '80px',
             textAlign: "center",
             template: function (row) {
                 return status_template(row, 'total');
@@ -137,6 +143,7 @@ let GradeDataForm = function (year, term) {
         }, {
             field: "final",
             title: "最终",
+            width: '80px',
             textAlign: "center",
             template: function (row) {
                 let status;
