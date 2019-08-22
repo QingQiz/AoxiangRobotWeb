@@ -28,13 +28,13 @@ let GradeDataForm = function (year, term) {
         data: {
             type: 'remote',
             source: '/api/grade?y=' + year + '&t=' + term,
-            pageSize: 20,
+            pageSize: 100,
         },
 
         layout: {
             theme: 'default',
             class: '',
-            scroll: false,
+            scroll: true,
             footer: false
         },
 
