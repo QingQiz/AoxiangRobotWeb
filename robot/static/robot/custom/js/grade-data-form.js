@@ -53,7 +53,7 @@ let GradeDataForm = function (year, term) {
             sortable: 0,
             textAlign: "center",
             selector: {
-                class: "m-checkbox m-checkbox--square grade-point-select",
+                class: "m-checkbox m-checkbox--square gp_checkbox",
                 checked: true
             },
         }, {

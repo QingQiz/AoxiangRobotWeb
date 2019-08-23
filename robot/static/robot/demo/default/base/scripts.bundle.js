@@ -862,7 +862,7 @@ $(document).ready(function () {
 						// redraw locked columns table
 						if (Plugin.isLocked()) Plugin.redraw();
 						$(datatable.tableBody).css('visibility', '');
-						$(datatable.wrap).addClass('m-datatable--loaded');
+						$(datatable.wrap).addClass('m-datatable--loaded').trigger('m-datatable--loaded');
 						Plugin.scrollbar.call();
 						Plugin.sorting.call();
 
@@ -1219,8 +1219,7 @@ $(document).ready(function () {
 								var value = $(td).text();
 
 								// enable column selector
-								if (typeof column.selector !== 'undefined' &&
-									column.selector !== false) {
+								if (typeof column.selector !== 'undefined' && column.selector !== false) {
 									// check if checkbox exist
 									if ($(td).find('.m-checkbox [type="checkbox"]').length > 0) return;
 									$(td).addClass('m-datatable__cell--check');
@@ -1245,6 +1244,9 @@ $(document).ready(function () {
 									if (typeof column.selector.class !== 'undefined') {
 										$(chk).addClass(column.selector.class);
 									}
+                                    if (column.selector.checked !== undefined) {
+                                        $(chk).find('input').attr('checked', 'checked');
+                                    }
 
 									$(td).children().html(chk);
 								}
@@ -1254,10 +1256,7 @@ $(document).ready(function () {
 									// check if subtable toggle exist
 									if ($(td).find('.m-datatable__toggle-subtable').length > 0) return;
 									// append subtable toggle
-									$(td).
-										children().
-										html($('<a/>').
-											addClass('m-datatable__toggle-subtable').
+									$(td).children().html($('<a/>').addClass('m-datatable__toggle-subtable').
 											attr('href', '#').
 											attr('data-value', value).
 											append($('<i/>').
@@ -1301,6 +1300,9 @@ $(document).ready(function () {
 							if (typeof column.selector.class !== 'undefined') {
 								$(chk).addClass(column.selector.class);
 							}
+							if (column.selector.checked !== undefined) {
+							    $(chk).find('input').attr('checked', 'checked');
+                            }
 
 							$(td).children().html(chk);
 						}

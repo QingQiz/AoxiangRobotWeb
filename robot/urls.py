@@ -1,5 +1,5 @@
 from django.urls import path
-from robot.views import index, login, error, grade, exam
+from robot.views import index, login, error, grade
 from robot.apis import check, get
 
 urlpatterns = [
@@ -12,7 +12,6 @@ urlpatterns = [
 
     path('action/login', login.login, name='Login'),
     path('action/grade', grade.get_grade, name='Grade'),
-    path('action/exam', exam.get_exam, name='Exam'),
 
     path('api/check', check.check, name='Check'),
     path('api/check_cookies', check.check_cookies, name="CCookies"),

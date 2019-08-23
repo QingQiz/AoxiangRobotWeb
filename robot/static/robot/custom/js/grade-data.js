@@ -106,6 +106,28 @@ let GradeData = function () {
                             self.columns(i).visible(0);
                         }
                     }
+                    self.on('m-datatable--loaded', function () {
+                        self.find('.gp_checkbox').each(function () {
+                            $(this).change(function () {
+                                let credit = 0, grade = 0;
+                                self.find('input').each(function (index) {
+                                    if (index === 0) return;
+                                    if ($(this).is(':checked')) {
+                                        let g = parseFloat(self.find('[data-field="final"]').eq(index).text());
+                                        if (!isNaN(g)) {
+                                            let c = parseFloat(self.find('[data-field="credit"]').eq(index).text());
+                                            grade += g * c;
+                                            credit += c;
+                                        }
+                                    }
+                                });
+                                self.attr('credit', credit).attr('grade', grade).trigger('gp--update');
+                                $('#gp__sum').trigger('gp--update');
+                            });
+                        });
+                        self.find('.gp_checkbox').eq(0).change();
+                    });
+                    self.trigger('m-datatable--loaded').find('.gp_checkbox').change();
                 }
             };
             wait_response();

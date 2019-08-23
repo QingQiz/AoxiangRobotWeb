@@ -19,6 +19,7 @@ let GradeAddTerm = function () {
                         marginTop: 0
                     }, 700, function () {
                         box.remove();
+                        $('#gp__sum').trigger('gp--update');
                     });
                 }
             });
@@ -67,13 +68,20 @@ let GradeAddTerm = function () {
     };
 
     let init_data_table = function (year, term) {
+        let id_body = year + '_' + term;
         table.children().eq(0).after(`
-            <div class="m-portlet m-portlet--mobile" style="margin-bottom: 0; margin-top: 15px" id="table__` + year + '_' + term + `">
+            <div class="m-portlet m-portlet--mobile" style="margin-bottom: 0; margin-top: 15px" id="table__` + id_body + `">
                 <div class="m-portlet__head">
                     <div class="m-portlet__head-caption">
                         <div class="m-portlet__head-title">
                             <h3 class="m-portlet__head-text">
-                                TITLE: ` + '  ' + year + ' 学年 (' + (term === 0 ? '上' : '下') +  '学期)' + ` 
+                                <div>
+                                    <span style="margin-right: 100px">
+                                        TITLE: ` + '  ' + year + ' 学年 (' + (term === 0 ? '上' : '下') +  '学期)' + ` 
+                                    </span>
+                                    学分绩：
+                                    <span id="gp__` + id_body + `"></span>
+                                </div>
                             </h3>
                         </div>
                     </div>
@@ -98,7 +106,7 @@ let GradeAddTerm = function () {
                                                             </span>
                                                         </li>
                                                         <li class="m-nav__item">
-                                                            <a href="#" class="m-nav__link" id="rm__table_` + year + '_' + term + `">
+                                                            <a href="#" class="m-nav__link" id="rm__table_` + id_body + `">
                                                                 <i class="m-nav__link-icon flaticon-delete-1"></i>
                                                                 <span class="m-nav__link-text">
                                                                     Remove This Table
@@ -116,27 +124,66 @@ let GradeAddTerm = function () {
                     </div>
                 </div>
                 <div class="m-portlet__body">
-                    <div class="m_datatable" year="` + (year % 100) + `" term="` + term + `">
+                    <div class="m_datatable" year="` + (year % 100) + `" term="` + term + `" credit="0" grade="0">
                     </div>
                 </div>
             </div>
         `);
-        table.find('#rm__table_' + year + '_' + term).click(function () {
-            add.find('#cb__' + year + '_' + term).click();
-        })
+        table.find('#rm__table_' + id_body).click(function () {
+            add.find('#cb__' + id_body).click();
+        });
+
+        table.find('#table__' + id_body + ' .m_datatable').on('gp--update', function () {
+            let credit = parseFloat($(this).attr('credit')), grade = parseFloat($(this).attr('grade'));
+            table.find('#gp__' + id_body)
+                .text((credit === 0 || isNaN(credit + grade)) ? '-' : (grade / credit).toFixed(2));
+        });
     };
+
+    let init_gp_sum = function () {
+        $('#gp__sum').on('gp--update', function () {
+            let credit = 0, grade = 0;
+            $('.m_datatable').each(function () {
+                credit += parseFloat($(this).attr('credit'));
+                grade += parseFloat($(this).attr('grade'));
+            });
+            let res = (grade / credit).toFixed(2);
+            let status;
+            if (isNaN(res)) {
+                status = 'secondary';
+            } else {
+                if (res < 60) {
+                    status = 'danger'
+                } else if (res < 80) {
+                    status = 'warning';
+                } else if (res < 90) {
+                    status = 'accent';
+                } else status = 'success';
+            }
+            $(this).html(`
+                <span class="m-badge m-badge--` + status + ` m-badge--wide" style="font-size: 2.3rem; padding: 9px 20px; border-radius: 5rem">
+                    ` + (isNaN(res) ? '-' : res) + `
+                </span>
+            `);
+        });
+    };
+
     return {
         init_add_menu: function () {
             addTerm();
         },
         init_data_table: function (year, term) {
             init_data_table(year, term);
+        },
+        init_gp_sum: function () {
+            init_gp_sum();
         }
     }
 }();
 
 jQuery(document).ready(function () {
     GradeAddTerm.init_add_menu();
+    GradeAddTerm.init_gp_sum();
     if (new Date().getMonth() > 3) {
         GradeAddTerm.init_data_table(new Date().getFullYear() - 1, 1);
     } else {

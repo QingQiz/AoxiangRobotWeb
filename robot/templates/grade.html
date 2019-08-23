@@ -233,7 +233,7 @@
                                                     </li>
                                                     <li class="m-menu__item " m-menu-link-redirect="1"
                                                         aria-haspopup="true">
-                                                        <a href="{% url "Exam" %}" class="m-menu__link ">
+                                                        <a href="{% url "Grade" %}" class="m-menu__link ">
                                                             <i class="m-menu__link-bullet m-menu__link-bullet--line">
                                                                 <span></span>
                                                             </i>
@@ -354,7 +354,7 @@
                 <div class="m-portlet__body">
                     <div class="m-form m-form--label-align-right">
                         <div class="row align-items-center">
-                            <div class="col-sm-10">
+                            <div class="col-sm-7">
                                 <div class="form-group m-form__group row align-items-center">
                                     <div class="col-md-4">
                                         <div class="m-form__group m-form__group--inline">
@@ -420,27 +420,40 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-2 m--align-right">
-                                <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" m-dropdown-toggle="click" aria-expanded="true" m-dropdown-persistent="1" style="padding: 0 5px;">
-                                    <a href="#" class="m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn--icon m-btn--icon-only m-btn--pill m-dropdown__toggle">
-                                        <i class="fa flaticon-add m--font-brand"></i>
-                                    </a>
-                                    <div class="m-dropdown__wrapper" style="z-index: 101;">
-                                        <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust" style="left: auto; right: 21.5px;"></span>
-                                        <div class="m-dropdown__inner">
-                                            <div class="m-dropdown__body">
-                                                <div class="m-dropdown__content">
-                                                    <ul class="m-nav" id="add-term">
-                                                        <li class="m-nav__section m-nav__section--first">
+                            <div class="col-sm-5 m--align-right">
+                                <div class="m-stack m-stack--ver m-stack--general">
+                                    <div class="m-stack__item m-stack__item--left m-stack__item--middle" style="">
+                                        <div class="m-stack m-stack--ver m-stack--general">
+                                            <div class="m-stack__item m-stack__item--right m-stack__item--middle">
+                                                <span style="font-size: 1.3rem"> 学分绩： </span>
+                                            </div>
+                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle" id="gp__sum">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="m-stack__item m-stack__item--right m-stack__item--middle" style="padding-right: 0">
+                                        <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" m-dropdown-toggle="click" aria-expanded="true" m-dropdown-persistent="1" style="padding: 0 5px;">
+                                            <a href="#" class="m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn--icon m-btn--icon-only m-btn--pill m-dropdown__toggle">
+                                                <i class="fa flaticon-add m--font-brand"></i>
+                                            </a>
+                                            <div class="m-dropdown__wrapper" style="z-index: 101;">
+                                                <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust" style="left: auto; right: 21.5px;"></span>
+                                                <div class="m-dropdown__inner">
+                                                    <div class="m-dropdown__body">
+                                                        <div class="m-dropdown__content">
+                                                            <ul class="m-nav" id="add-term">
+                                                                <li class="m-nav__section m-nav__section--first">
                                                             <span class="m-nav__section-text">
                                                                 Select Term To Add
                                                             </span>
-                                                        </li>
-                                                        <li class="m-nav__section m-nav__section--first">
-                                                            <div class="m-accordion m-accordion--default m-accordion--solid m-accordion--section m-accordion--padding-lg" id="m_accordion_8" role="tablist">
-                                                            </div>
-                                                        </li>
-                                                    </ul>
+                                                                </li>
+                                                                <li class="m-nav__section m-nav__section--first">
+                                                                    <div class="m-accordion m-accordion--default m-accordion--solid m-accordion--section m-accordion--padding-lg" id="m_accordion_8" role="tablist">
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
