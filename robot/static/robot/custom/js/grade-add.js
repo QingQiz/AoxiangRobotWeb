@@ -161,7 +161,7 @@ let GradeAddTerm = function () {
                 } else status = 'success';
             }
             $(this).html(`
-                <span class="m-badge m-badge--` + status + ` m-badge--wide" style="font-size: 2.3rem; padding: 9px 20px; border-radius: 5rem">
+                <span class="m-badge m-badge--` + status + ` m-badge--wide" style="font-size: 2.3rem; padding: 9px 20px; border-radius: 5rem; font-weight: bold">
                     ` + (isNaN(res) ? '-' : res) + `
                 </span>
             `);
