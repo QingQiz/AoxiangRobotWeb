@@ -128,6 +128,8 @@ let GradeData = function () {
                         self.find('.gp_checkbox').eq(0).change();
                     });
                     self.trigger('m-datatable--loaded').find('.gp_checkbox').change();
+                    $('#m_form_status, #m_form_type').change();
+                    $('#generalSearch').keyup();
                 }
             };
             wait_response();
