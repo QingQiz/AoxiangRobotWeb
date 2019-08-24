@@ -124,7 +124,7 @@ let GradeAddTerm = function () {
                     </div>
                 </div>
                 <div class="m-portlet__body">
-                    <div class="m_datatable" year="` + (year % 100) + `" term="` + term + `" credit="0" grade="0">
+                    <div class="m_datatable" year="` + (year % 100) + `" term="` + term + `" credit="0" grade="0" style="overflow-x: auto; ">
                     </div>
                 </div>
             </div>

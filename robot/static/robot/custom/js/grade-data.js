@@ -21,7 +21,7 @@ let GradeData = function () {
                                 function (index) {
                                     let num = parseFloat(index[0]);
                                     if (isNaN(num)) return false;
-                                    return num < 80;
+                                    return num < 60;
                                 },
                                 ['final']
                             ]);
@@ -31,7 +31,7 @@ let GradeData = function () {
                                 function (index) {
                                     let final = parseFloat(index[0]);
                                     if (isNaN(final)) return false;
-                                    return final >= 80;
+                                    return final >= 60;
                                 },
                                 ['final']
                             ]);
@@ -130,6 +130,7 @@ let GradeData = function () {
                     self.trigger('m-datatable--loaded').find('.gp_checkbox').change();
                     $('#m_form_status, #m_form_type').change();
                     $('#generalSearch').keyup();
+                    self.find('table').css('min-width', '100%');
                 }
             };
             wait_response();

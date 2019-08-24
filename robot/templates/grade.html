@@ -1,6 +1,5 @@
 {% load static %}
-<html lang="en"
-      class="wf-poppins-n3-active wf-poppins-n4-active wf-poppins-n5-active wf-poppins-n6-active wf-poppins-n7-active wf-roboto-n3-active wf-roboto-n4-active wf-roboto-n5-active wf-roboto-n6-active wf-roboto-n7-active wf-active">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <title>
@@ -94,6 +93,11 @@
             to {
                 opacity: 1
             }
+        }
+    </style>
+    <style type="text/css">
+        .sb_safari * {
+            height: unset !important;
         }
     </style>
 </head>
@@ -420,20 +424,19 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-5 m--align-right">
+                            <div class="col-sm-5 m--align-right sb_safari">
                                 <div class="m-stack m-stack--ver m-stack--general">
                                     <div class="m-stack__item m-stack__item--left m-stack__item--middle" style="">
                                         <div class="m-stack m-stack--ver m-stack--general">
                                             <div class="m-stack__item m-stack__item--right m-stack__item--middle">
                                                 <span style="font-size: 1.3rem"> 学分绩： </span>
                                             </div>
-                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle" id="gp__sum">
-                                            </div>
+                                            <div class="m-stack__item m-stack__item--center m-stack__item--middle" id="gp__sum"></div>
                                         </div>
                                     </div>
                                     <div class="m-stack__item m-stack__item--right m-stack__item--middle" style="padding-right: 0">
                                         <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" m-dropdown-toggle="click" aria-expanded="true" m-dropdown-persistent="1" style="padding: 0 5px;">
-                                            <a href="#" class="m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn--icon m-btn--icon-only m-btn--pill m-dropdown__toggle">
+                                            <a href="#" class="m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn--icon m-btn--icon-only m-btn--pill m-dropdown__toggle" style="height: 43px!important;">
                                                 <i class="fa flaticon-add m--font-brand"></i>
                                             </a>
                                             <div class="m-dropdown__wrapper" style="z-index: 101;">
@@ -467,32 +470,33 @@
         </div>
     </div>
 
-    <footer class="m-grid__item	m-footer" style="margin-left: 0">
-        <div class="m-stack m-stack--flex-tablet-and-mobile m-stack--ver m-stack--desktop">
-            <div class="m-stack__item m-stack__item--left m-stack__item--middle m-stack__item--last">
-                <span class="m-footer__copyright">
-                    2019 © AoxiangRobot
-                    <a href="https://github.com/QingQiz" class="m-link">
-                        QingQiz
-                    </a>
-                </span>
-            </div>
-            <div class="m-stack__item m-stack__item--right m-stack__item--middle m-stack__item--first">
-                <ul class="m-footer__nav m-nav m-nav--inline m--pull-right">
-                    <li class="m-nav__item">
-                        <a href="#" class="m-nav__link">
-                            <span class="m-nav__link-text">
-                                About
-                            </span>
+    <footer class="m-grid__item	m-footer sb_safari" style="margin-left: 0">
+        <div class="m-container m-container--fluid m-container--full-height m-page__container">
+            <div class="m-stack m-stack--flex-tablet-and-mobile m-stack--ver m-stack--desktop">
+                <div class="m-stack__item m-stack__item--left m-stack__item--middle m-stack__item--last">
+                    <span class="m-footer__copyright">
+                        2019 © AoxiangRobot
+                        <a href="https://github.com/QingQiz" class="m-link">
+                            QingQiz
                         </a>
-                    </li>
-                    <li class="m-nav__item m-nav__item">
-                        <a href="#" class="m-nav__link" data-toggle="m-tooltip" title="" data-placement="left"
-                           data-original-title="Support Center">
-                            <i class="m-nav__link-icon flaticon-info m--icon-font-size-lg3"></i>
-                        </a>
-                    </li>
-                </ul>
+                    </span>
+                </div>
+                <div class="m-stack__item m-stack__item--right m-stack__item--middle m-stack__item--first">
+                    <ul class="m-footer__nav m-nav m-nav--inline m--pull-right">
+                        <li class="m-nav__item">
+                            <a href="#" class="m-nav__link">
+                                <span class="m-nav__link-text">
+                                    About
+                                </span>
+                            </a>
+                        </li>
+                        <li class="m-nav__item m-nav__item">
+                            <a href="#" class="m-nav__link" data-toggle="m-tooltip" title="" data-placement="left" data-original-title="Support Center">
+                                <i class="m-nav__link-icon flaticon-info m--icon-font-size-lg3"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </footer>
