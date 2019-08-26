@@ -107,9 +107,15 @@ let GradeData = function () {
                         }
                     }
                     self.on('m-datatable--loaded', function () {
-                        self.find('.gp_checkbox').each(function () {
+                        let status = self.attr('cb__status');
+                        self.find('.gp_checkbox').each(function (idx) {
+                            if (status === undefined || status[idx] === '1') {
+                                $(this).attr('checked', 'checked');
+                            } else {
+                                $(this).click();
+                            }
                             $(this).change(function () {
-                                let credit = 0, grade = 0;
+                                let credit = 0, grade = 0, status = '0';
                                 self.find('input').each(function (index) {
                                     if (index === 0) return;
                                     if ($(this).is(':checked')) {
@@ -119,14 +125,19 @@ let GradeData = function () {
                                             grade += g * c;
                                             credit += c;
                                         }
-                                    }
+                                        status += '1';
+                                    } else status += '0';
                                 });
-                                self.attr('credit', credit).attr('grade', grade).trigger('gp--update');
+                                self.attr('credit', credit).attr('grade', grade).attr('cb__status', status).trigger('gp--update');
                                 $('#gp__sum').trigger('gp--update');
                             });
                         });
                         self.find('.gp_checkbox').eq(0).change();
                     });
+                    self.on('m-datatable--on-sort', function () {
+                        self.removeAttr('cb__status');
+                    });
+
                     self.trigger('m-datatable--loaded').find('.gp_checkbox').change();
                     $('#m_form_status, #m_form_type').change();
                     $('#generalSearch').keyup();
