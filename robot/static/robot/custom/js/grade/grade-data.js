@@ -91,6 +91,7 @@ let GradeData = function () {
                     if (response['error'] !== undefined) return;
                     if (response[0] === undefined) return;
 
+                    // hide invalid row
                     let flg = {};
                     for (let i in response[0]) flg[i] = 0;
                     for (let i in flg) flg[i] = 0;
@@ -106,16 +107,23 @@ let GradeData = function () {
                             self.columns(i).visible(0);
                         }
                     }
+
                     self.on('m-datatable--loaded', function () {
                         let status = self.attr('cb__status');
-                        self.find('.gp_checkbox').each(function (idx) {
-                            if (status === undefined || status[idx] === '1') {
+                        self.find('input').each(function (index) {
+                            if (status === undefined || status[index] === '1') {
                                 $(this).attr('checked', 'checked');
                             } else {
-                                $(this).click();
+                                if ($(this).is(':checked')) $(this)[0].checked = false;
                             }
+                        });
+                        self.trigger('after-loaded--done');
+                    });
+
+                    self.on('after-loaded--done', function () {
+                        self.find('.gp_checkbox').each(function () {
                             $(this).change(function () {
-                                let credit = 0, grade = 0, status = '0';
+                                let credit = 0, grade = 0;
                                 self.find('input').each(function (index) {
                                     if (index === 0) return;
                                     if ($(this).is(':checked')) {
@@ -125,15 +133,26 @@ let GradeData = function () {
                                             grade += g * c;
                                             credit += c;
                                         }
-                                        status += '1';
-                                    } else status += '0';
+                                    }
                                 });
-                                self.attr('credit', credit).attr('grade', grade).attr('cb__status', status).trigger('gp--update');
+                                self.attr('credit', credit).attr('grade', grade).trigger('gp--update').trigger('cb--checked');
                                 $('#gp__sum').trigger('gp--update');
                             });
                         });
                         self.find('.gp_checkbox').eq(0).change();
                     });
+
+                    self.on('cb--checked', function () {
+                        let status = '0';
+                        self.find('input').each(function (index) {
+                            if (index === 0) return;
+                            if ($(this).is(':checked')) {
+                                status += '1';
+                            } else status += '0';
+                        });
+                        self.attr('cb__status', status);
+                    });
+
                     self.on('m-datatable--on-sort', function () {
                         self.removeAttr('cb__status');
                     });
