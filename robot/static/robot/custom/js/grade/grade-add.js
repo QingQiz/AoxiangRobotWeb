@@ -24,47 +24,51 @@ let GradeAddTerm = function () {
                 }
             });
         };
-        for (let i = 0; i < 5; ++i) {
-            if (i === 0 && new Date().getMonth() < '9' && new Date().getDate() < '25') continue;
-            let c_y = year - i;
-            let cnt = i + 1;
-            add.append(`
-                <div class="m-accordion m-accordion--default m-accordion--solid m-accordion--section m-accordion--padding-lg" id="m_accordion_8" role="tablist">
-                    <div class="m-accordion__item">
-                        <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_8_item_` + cnt + `_head" data-toggle="collapse" href="#m_accordion_8_item_` + cnt + `_body" aria-expanded="false" style="padding: 15px 28px; margin-top: 10px">
-                            <span class="m-accordion__item-title">
-                                ` + c_y + '  学年' + `
-                            </span>
-                            <span class="m-accordion__item-mode"></span>
-                        </div>
-                        <div class="m-accordion__item-body collapse" id="m_accordion_8_item_` + cnt + `_body" role="tabpanel" aria-labelledby="m_accordion_8_item_1_head" data-parent="#m_accordion_8" style="">
-                            <div class="m-accordion__item-content">
-                                <div class="m-checkbox-list">
-                                    <label class="m-checkbox m-checkbox--square">
-                                        <input type="checkbox" value="0" id="` + 'cb__' + c_y + '_0' + `">
-                                            上学期
-                                        <span></span>
-                                    </label>
-                                    <label class="m-checkbox m-checkbox--square">
-                                        <input type="checkbox" value="1" id="` + 'cb__' + c_y + '_1' + `">
-                                            下学期
-                                        <span></span>
-                                    </label>
+        $.get('/api/getId', function (data, status) {
+            let beg_year = data['id'];
+            if (beg_year === undefined) return;
+            beg_year = parseInt(beg_year.slice(0, 4));
+            for (let c_y = year; c_y >= beg_year; --c_y) {
+                if (c_y === year && new Date().getMonth() < '9' && new Date().getDate() < '25') continue;
+                let cnt = c_y - beg_year + 1;
+                add.append(`
+                    <div class="m-accordion m-accordion--default m-accordion--solid m-accordion--section m-accordion--padding-lg" id="m_accordion_8" role="tablist">
+                        <div class="m-accordion__item">
+                            <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_8_item_` + cnt + `_head" data-toggle="collapse" href="#m_accordion_8_item_` + cnt + `_body" aria-expanded="false" style="padding: 15px 28px; margin-top: 10px">
+                                <span class="m-accordion__item-title">
+                                    ` + c_y + '  学年' + `
+                                </span>
+                                <span class="m-accordion__item-mode"></span>
+                            </div>
+                            <div class="m-accordion__item-body collapse" id="m_accordion_8_item_` + cnt + `_body" role="tabpanel" aria-labelledby="m_accordion_8_item_1_head" data-parent="#m_accordion_8" style="">
+                                <div class="m-accordion__item-content">
+                                    <div class="m-checkbox-list">
+                                        <label class="m-checkbox m-checkbox--square">
+                                            <input type="checkbox" value="0" id="` + 'cb__' + c_y + '_0' + `">
+                                                上学期
+                                            <span></span>
+                                        </label>
+                                        <label class="m-checkbox m-checkbox--square">
+                                            <input type="checkbox" value="1" id="` + 'cb__' + c_y + '_1' + `">
+                                                下学期
+                                            <span></span>
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            `);
-            if (i === 0) add.find('#cb__' + year + '_1').attr('disabled', 'disabled');
-            toggle_table(c_y, 0);
-            toggle_table(c_y, 1);
-        }
-        if (new Date().getMonth() > 3) {
-            add.find('#cb__' + (year - 1) + '_1').attr('checked', 'checked');
-        } else {
-            add.find('#cb__' + (year - 1) + '_0').attr('checked', 'checked');
-        }
+                `);
+                if (c_y === year) add.find('#cb__' + year + '_1').attr('disabled', 'disabled');
+                toggle_table(c_y, 0);
+                toggle_table(c_y, 1);
+            }
+            if (new Date().getMonth() > 3) {
+                add.find('#cb__' + (year - 1) + '_1').attr('checked', 'checked');
+            } else {
+                add.find('#cb__' + (year - 1) + '_0').attr('checked', 'checked');
+            }
+        });
     };
 
     let init_data_table = function (year, term) {

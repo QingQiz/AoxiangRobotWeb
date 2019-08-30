@@ -17,5 +17,5 @@ urlpatterns = [
     path('api/check', check.check, name='Check'),
     path('api/check_cookies', check.check_cookies, name="CCookies"),
     path('api/grade', get.get_grade, name="GradeApi"),
-    path('api/exam', get.get_exam, name="ExamApi")
+    path('api/getId', get.get_id, name="GET_ID")
 ]
