@@ -21,7 +21,7 @@ def username_password(up):
     try:
         res = AES(settings.SECRET_KEY).decrypt(up)
         return res[0:10], res[10:]
-    except (binascii.Error, ValueError):
+    except (binascii.Error, ValueError, TypeError):
         return None
 
 
