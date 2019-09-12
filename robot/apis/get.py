@@ -58,11 +58,17 @@ def get_ct(request):
     if res is None:
         return HttpResponse(json.dumps({'error': 1}), content_type='application/json')
 
-    class_info = GetClass.get(username=res[0], password=res[1])
-    info = ClassTable.get_json(class_info, '20190826')
-    for i in info:
-        i['className'] = 'm-fc-event--accent'
-    return HttpResponse(json.dumps(info), content_type='application/json')
+    try:
+        method = int(request.GET.get('cp'))
+
+        class_info = GetClass.get(method, username=res[0], password=res[1])
+        info = ClassTable.get_json(class_info, '20190826', method)
+
+        for i in info:
+            i['className'] = 'm-fc-event--accent'
+        return HttpResponse(json.dumps(info), content_type='application/json')
+    except ValueError:
+        return HttpResponse(json.dumps({'error': 1}), content_type='application/json')
 
 
 @csrf_exempt
@@ -73,7 +79,14 @@ def export_ct(request):
     if res is None:
         return HttpResponse(json.dumps({'error': 1}), content_type='application/json')
 
-    class_info = GetClass.get(username=res[0], password=res[1])
-    info = ClassTable.get_calendar(class_info, '20190826')
-    return HttpResponse(info, content_type='application/octet-stream')
+    try:
+        method = int(request.GET.get('cp'))
+
+        class_info = GetClass.get(method, username=res[0], password=res[1])
+        info = ClassTable.get_calendar(class_info, '20190826', method=method)
+
+        return HttpResponse(info, content_type='application/octet-stream')
+    except ValueError:
+        return HttpResponse(json.dumps({'error': 1}), content_type='application/json')
+
 

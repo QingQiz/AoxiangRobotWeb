@@ -356,8 +356,10 @@
                         <i class="flaticon-exclamation m--font-brand"></i>
                     </div>
                     <div class="m-alert__text">
-                        这个功能尚未得到充分的测试, 对于某些奇怪的课程表可能会产生一些奇怪的问题; 如果遇到问题, 请转到
-                        <a href="https://github.com/QingQiz/AoxiangRobotWeb">GitHub</a> 提供反馈
+                        该功能尚未得到充分的测试，对于某些奇怪的课程表可能会产生一些奇怪的问题；如果遇到问题， 请转到
+                        <a href="https://github.com/QingQiz/AoxiangRobotWeb">GitHub</a> 提供反馈。
+                        <br>
+                        建议屏幕比较小的用户直接 export (<s>才不是我懒得适配呢</s>
                     </div>
                 </div>
                 <div class="row">
@@ -377,14 +379,29 @@
                                 <div class="m-portlet__head-tools">
                                     <ul class="m-portlet__nav">
                                         <li class="m-portlet__nav-item">
-                                            <a href="#" class="btn btn-accent m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air" id="export_ct">
-                                                <span>
-                                                    <i class="la la-plus"></i>
+                                            <div class="btn-group m-btn-group m-btn--air" role="group" aria-label="Button group with nested dropdown">
+                                                <div class="btn-group m-btn-group" role="group">
+                                                    <button id="btnSelCampus" type="button" class="btn btn-outline-accent m-btn m-btn--custom m-btn--outline-2x" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border-radius: 100px 0 0 100px" campus="0">
+                                                        ChangAn Campus
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="btnSelCampus" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
+                                                        <a class="dropdown-item" href="#" onclick="$('#btnSelCampus').text('ChangAn Campus').attr('campus', 0).change()">
+                                                            ChangAn Campus
+                                                        </a>
+                                                        <a class="dropdown-item" href="#" onclick="$('#btnSelCampus').text('Youyi Campus').attr('campus', 1).change()">
+                                                            Youyi Campus
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <button class="btn btn-accent m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air" id="export_ct" type="button">
                                                     <span>
-                                                        Export
+                                                        <i class="la la-plus"></i>
+                                                        <span>
+                                                            Export
+                                                        </span>
                                                     </span>
-                                                </span>
-                                            </a>
+                                                </button>
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>
