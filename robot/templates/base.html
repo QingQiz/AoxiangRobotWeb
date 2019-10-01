@@ -266,6 +266,7 @@
                             </li>
                         </ul>
                     </div>
+                    {% block user_section %}
                     <div id="m_header_topbar" class="m-topbar  m-stack m-stack--ver m-stack--general m-stack--fluid">
                         <div class="m-stack__item m-topbar__nav-wrapper">
                             <ul class="m-topbar__nav m-nav m-nav--inline">
@@ -305,8 +306,6 @@
                                                                 Section
                                                             </span>
                                                         </li>
-                                                        {#<li class="m-nav__separator m-nav__separator--fit"></li>#}
-
                                                         <li class="m-nav__item">
                                                             <a href="#" class="m-nav__link">
                                                                 <i class="m-nav__link-icon flaticon-info"></i>
@@ -338,6 +337,7 @@
                             </ul>
                         </div>
                     </div>
+                    {% endblock %}
                 </div>
             </div>
         </div>
@@ -380,9 +380,11 @@
 <div id="m_scroll_top" class="m-scroll-top">
     <i class="la la-arrow-up"></i>
 </div>
+{% block base_js %}
 <script src="{% static 'robot/vendors/base/vendors.bundle.js' %}" type="text/javascript"></script>
 <script src="{% static 'robot/demo/default/base/scripts.bundle.js' %}" type="text/javascript"></script>
 <script src="{% static 'robot/demo/default/base/layout.js' %}" type="application/javascript"></script>
+{% endblock %}
 {% block ext_js %}
 {% endblock %}
 </body>

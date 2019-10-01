@@ -1,15 +1,186 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Home</title>
-</head>
+{% extends "base.html" %}
+{% load static %}
 
-<body>
-<script type="application/javascript">
-    location.href="{% url 'Grade' %}";
-</script>
-<a href="{% url 'Login' %}"> Login page </a><br><br>
-<a href="{% url 'Grade' %}"> Grade page </a><br><br>
-<a href="{% url 'Error' %}"> Error page </a>
-</body>
-</html>
+{% block title %}
+    Index
+{% endblock %}
+
+{% block user_section %}
+{% endblock %}
+
+{% block ext_js %}
+{% endblock %}
+
+{% block content %}
+    <div class="m-subheader m--padding-top-15 m--padding-bottom-15">
+        <div class="d-flex align-items-center">
+            <div class="mr-auto">
+                <h3 class="m-subheader__title m-subheader__title--separator">
+                    Home
+                </h3>
+                <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+                    <li class="m-nav__item m-nav__item--home">
+                        <a href="#" class="m-nav__link m-nav__link--icon">
+                            <i class="m-nav__link-icon la la-home"></i>
+                        </a>
+                    </li>
+                    <li class="m-nav__separator">
+                        -
+                    </li>
+                    <li class="m-nav__item">
+                        <a href="#" class="m-nav__link">
+                            <span class="m-nav__link-text">
+                                Index
+                            </span>
+                        </a>
+                    </li>
+                    <li class="m-nav__separator">
+                        -
+                    </li>
+                    <li class="m-nav__item">
+                        <a href="#" class="m-nav__link">
+                            <span class="m-nav__link-text">
+                                Actions
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="m-content">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="m-portlet">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <h3 class="m-portlet__head-text">
+                                    Aoxiang
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-portlet__body">
+                        <div class="m-section m-section--last">
+                            <div class="m-section__content">
+                                <div class="m-demo" data-code-preview="true" data-code-html="true" data-code-js="false">
+                                    <div class="m-demo__preview">
+                                        <div class="m-nav-grid">
+                                            <div class="m-nav-grid__row">
+                                                <a href="#" class="m-nav-grid__item">
+                                                    <i class="m-nav-grid__icon flaticon-file"></i>
+                                                    <span class="m-nav-grid__text">
+                                                    A
+                                                </span>
+                                                </a>
+                                                <a href="#" class="m-nav-grid__item">
+                                                    <i class="m-nav-grid__icon flaticon-time"></i>
+                                                    <span class="m-nav-grid__text">
+                                                    B
+                                                </span>
+                                                </a>
+                                                <a href="#" class="m-nav-grid__item">
+                                                    <i class="m-nav-grid__icon flaticon-user"></i>
+                                                    <span class="m-nav-grid__text">
+                                                    C
+                                                </span>
+                                                </a>
+                                            </div>
+                                            <div class="m-nav-grid__row">
+                                                <a href="#" class="m-nav-grid__item">
+                                                    <i class="m-nav-grid__icon flaticon-folder"></i>
+                                                    <span class="m-nav-grid__text">
+                                                    D
+                                                </span>
+                                                </a>
+                                                <a href="#" class="m-nav-grid__item">
+                                                    <i class="m-nav-grid__icon flaticon-clipboard"></i>
+                                                    <span class="m-nav-grid__text">
+                                                    E
+                                                </span>
+                                                </a>
+                                                <a href="#" class="m-nav-grid__item">
+                                                    <i class="m-nav-grid__icon flaticon-interface-3"></i>
+                                                    <span class="m-nav-grid__text">
+                                                    F
+                                                </span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="m-portlet">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <h3 class="m-portlet__head-text">
+                                    Others
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-portlet__body">
+                        <div class="m-section m-section--last">
+                            <div class="m-section__content">
+                                <div class="m-demo" data-code-preview="true" data-code-html="true" data-code-js="false">
+                                    <div class="m-demo__preview">
+                                        <div class="m-nav-grid">
+                                            <div class="m-nav-grid__row">
+                                                <a href="#" class="m-nav-grid__item">
+                                                    <i class="m-nav-grid__icon flaticon-file"></i>
+                                                    <span class="m-nav-grid__text">
+                                                    A
+                                                </span>
+                                                </a>
+                                                <a href="#" class="m-nav-grid__item">
+                                                    <i class="m-nav-grid__icon flaticon-time"></i>
+                                                    <span class="m-nav-grid__text">
+                                                    B
+                                                </span>
+                                                </a>
+                                                <a href="#" class="m-nav-grid__item">
+                                                    <i class="m-nav-grid__icon flaticon-user"></i>
+                                                    <span class="m-nav-grid__text">
+                                                    C
+                                                </span>
+                                                </a>
+                                            </div>
+                                            <div class="m-nav-grid__row">
+                                                <a href="#" class="m-nav-grid__item">
+                                                    <i class="m-nav-grid__icon flaticon-folder"></i>
+                                                    <span class="m-nav-grid__text">
+                                                    D
+                                                </span>
+                                                </a>
+                                                <a href="#" class="m-nav-grid__item">
+                                                    <i class="m-nav-grid__icon flaticon-clipboard"></i>
+                                                    <span class="m-nav-grid__text">
+                                                    E
+                                                </span>
+                                                </a>
+                                                <a href="#" class="m-nav-grid__item">
+                                                    <i class="m-nav-grid__icon flaticon-interface-3"></i>
+                                                    <span class="m-nav-grid__text">
+                                                    F
+                                                </span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
