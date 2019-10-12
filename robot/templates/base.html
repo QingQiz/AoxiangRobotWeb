@@ -212,7 +212,7 @@
                                             <li class="m-menu__item">
                                                 <h3 class="m-menu__heading m-menu__toggle">
                                                     <span class="m-menu__link-text">
-                                                        Get Information Actions
+                                                        Aoxiang Actions
                                                     </span>
                                                     <i class="m-menu__ver-arrow la la-angle-right"></i>
                                                 </h3>
@@ -242,11 +242,22 @@
                                             <li class="m-menu__item">
                                                 <h3 class="m-menu__heading m-menu__toggle">
                                                     <span class="m-menu__link-text">
-                                                        Show Error Actions
+                                                        Other Actions
                                                     </span>
                                                     <i class="m-menu__ver-arrow la la-angle-right"></i>
                                                 </h3>
                                                 <ul class="m-menu__inner">
+                                                    <li class="m-menu__item " m-menu-link-redirect="1"
+                                                        aria-haspopup="true">
+                                                        <a href="{% static "cyberchef/cyberchef.html" %}" class="m-menu__link ">
+                                                            <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                                                <span></span>
+                                                            </i>
+                                                            <span class="m-menu__link-text">
+                                                                CyberChef
+                                                            </span>
+                                                        </a>
+                                                    </li>
                                                     <li class="m-menu__item " m-menu-link-redirect="1"
                                                         aria-haspopup="true">
                                                         <a href="{% url "Error" %}" class="m-menu__link ">
@@ -289,10 +300,10 @@
                                                         <img src="{% static 'robot/custom/img/uimg.png' %}" class="m--img-rounded m--marginless" alt="">
                                                     </div>
                                                     <div class="m-card-user__details">
-                                                        <span class="m-card-user__name m--font-weight-500">
+                                                        <span class="m-card-user__name m--font-weight-500" id="header--user-name">
                                                             你的名字
                                                         </span>
-                                                        <a href="" class="m-card-user__email m--font-weight-300 m-link">
+                                                        <a href="" class="m-card-user__email m--font-weight-300 m-link" id="header--user-mail">
                                                             你的邮箱
                                                         </a>
                                                     </div>
@@ -367,7 +378,7 @@
                             </a>
                         </li>
                         <li class="m-nav__item m-nav__item">
-                            <a href="#" class="m-nav__link" data-toggle="m-tooltip" title="" data-placement="left" data-original-title="Support Center">
+                            <a href="https://github.com/QingQiz/AoxiangRobotWeb" class="m-nav__link" data-toggle="m-tooltip" title="" data-placement="left" data-original-title="Support Center">
                                 <i class="m-nav__link-icon flaticon-info m--icon-font-size-lg3"></i>
                             </a>
                         </li>
