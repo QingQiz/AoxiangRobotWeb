@@ -3,7 +3,6 @@ from . import check
 from django.http import HttpResponse
 from robot.lib.AoxiangRobot.functions import Grade
 from robot.lib.AoxiangRobot.functions.ClassTable import ClassTable, GetClass
-from django.views.decorators.csrf import csrf_exempt
 
 
 def valid_data(tid, term):
@@ -14,7 +13,6 @@ def valid_data(tid, term):
         return False
 
 
-@csrf_exempt
 def get_grade(request):
     # check data
     year, term = request.GET.get('y'), request.GET.get('t')
@@ -39,7 +37,6 @@ def get_grade(request):
     return HttpResponse(json.dumps(res), content_type='application/json')
 
 
-@csrf_exempt
 def get_id(request):
     # check cookie
     up = request.COOKIES.get('up')
@@ -50,7 +47,6 @@ def get_id(request):
     return HttpResponse(json.dumps({'id': res[0]}), content_type='application/json')
 
 
-@csrf_exempt
 def get_ct(request):
     # check cookie
     up = request.COOKIES.get('up')
@@ -71,7 +67,6 @@ def get_ct(request):
         return HttpResponse(json.dumps({'error': 1}), content_type='application/json')
 
 
-@csrf_exempt
 def export_ct(request):
     # check cookie
     up = request.COOKIES.get('up')

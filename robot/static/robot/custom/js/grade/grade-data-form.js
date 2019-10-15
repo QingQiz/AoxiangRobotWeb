@@ -27,7 +27,14 @@ let GradeDataForm = function (year, term) {
     return {
         data: {
             type: 'remote',
-            source: '/api/grade?y=' + year + '&t=' + term,
+            source: {
+                read: {
+                    url: '/api/grade?y=' + year + '&t=' + term,
+                    headers: {
+                        'X-CSRFToken': Cookies.get('csrftoken')
+                    }
+                }
+            },
             pageSize: 100,
         },
 
