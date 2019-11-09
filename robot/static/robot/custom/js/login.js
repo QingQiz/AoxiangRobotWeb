@@ -90,7 +90,7 @@ const SnippetLogin = function () {
             btn.addClass('m-loader m-loader--right m-loader--light').attr('disabled', true);
 
             form.ajaxSubmit({
-                url: '/api/check',
+                url: '/ax/api/check',
                 success: function (response, status, xhr, $form) {
                     // similate 2s delay
                     if (response['info'] === -1) {

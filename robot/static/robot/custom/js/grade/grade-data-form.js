@@ -29,7 +29,7 @@ let GradeDataForm = function (year, term) {
             type: 'remote',
             source: {
                 read: {
-                    url: '/api/grade?y=' + year + '&t=' + term,
+                    url: '/ax/api/grade?y=' + year + '&t=' + term,
                     headers: {
                         'X-CSRFToken': Cookies.get('csrftoken')
                     }

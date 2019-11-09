@@ -1,6 +1,7 @@
 from django.urls import path
-from robot.views import index, login, error, grade, class_table
-from robot.apis import check, get
+from robot.views.Aoxiang import login, grade, class_table
+from robot.views.Public import index, error
+from robot.apis.Aoxiang import check, get
 
 urlpatterns = [
     path('', index.index, name='Index'),
@@ -10,14 +11,14 @@ urlpatterns = [
     path('error/400', error.e400, name="400"),
     path('error/500', error.e500, name="500"),
 
-    path('action/login', login.login, name='Login'),
-    path('action/grade', grade.get_grade, name='Grade'),
-    path('action/ct', class_table.class_table, name='CT'),
+    path('ax/action/login', login.login, name='Login'),
+    path('ax/action/grade', grade.get_grade, name='Grade'),
+    path('ax/action/ct', class_table.class_table, name='CT'),
 
-    path('api/check', check.check, name='Check'),
-    path('api/check_cookies', check.check_cookies, name="CCookies"),
-    path('api/grade', get.get_grade, name="GradeApi"),
-    path('api/getId', get.get_id, name="GET_ID"),
-    path('api/ct', get.get_ct, name="GCT"),
-    path('api/exp_ct.ics', get.export_ct, name="ECT"),
+    path('ax/api/check', check.check, name='Check'),
+    path('ax/api/check_cookies', check.check_cookies, name="CCookies"),
+    path('ax/api/grade', get.get_grade, name="GradeApi"),
+    path('ax/api/getId', get.get_id, name="GET_ID"),
+    path('ax/api/ct', get.get_ct, name="GCT"),
+    path('ax/api/exp_ct.ics', get.export_ct, name="ECT"),
 ]

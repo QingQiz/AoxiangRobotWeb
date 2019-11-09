@@ -25,7 +25,7 @@ let GradeAddTerm = function () {
             });
         };
         $.ajax({
-            url: '/api/getId',
+            url: '/ax/api/getId',
             headers: {
                 'X-CSRFToken': Cookies.get('csrftoken')
             },

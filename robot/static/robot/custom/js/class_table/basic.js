@@ -8,7 +8,7 @@ let CalendarForm = function () {
         duration: aniTime,
         complete: function () {
             $.ajax({
-                url: '/api/ct?cp=' + $('#btnSelCampus').attr('campus'),
+                url: '/ax/api/ct?cp=' + $('#btnSelCampus').attr('campus'),
                 headers: {
                     'X-CSRFToken': Cookies.get('csrftoken')
                 },
