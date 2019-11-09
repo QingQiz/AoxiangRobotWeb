@@ -74,14 +74,15 @@ WSGI_APPLICATION = 'AoxiangRobotWeb.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'OPTIONS': {
-#            'read_default_file': '/opt/AoxiangRobotWeb/db.cnf'
-#         }
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+            'read_default_file': '/opt/AoxiangRobotWeb/db.cnf',
+            'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"',
+        }
+    }
+}
 
 
 # Password validation
