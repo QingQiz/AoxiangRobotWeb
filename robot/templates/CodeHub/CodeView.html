@@ -1,0 +1,71 @@
+{% extends 'Public/base.html' %}
+{% load static %}
+
+{% block title %}
+    View -- CodeHub
+{% endblock %}
+
+{% block user_section %}
+{% endblock %}
+
+{% block ext_header %}
+    <style>
+        @font-face {
+            font-family: "DSM";
+            src: url("{% static 'robot/custom/CodeHub/ttf/DejaVuSansMono.ttf' %}");
+        }
+
+        code, code pre {
+            font-size: 16px;
+            font-family: DSM;
+            overflow-x: visible;
+            line-height: 20px;
+        }
+
+        table {
+            border-spacing: 12px 0;
+        }
+
+        th {
+            text-align: right;
+            padding-right: 6px;
+            border-right: 2px solid darkgrey;
+        }
+
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'robot/custom/CodeHub/css/default.css' %}">
+    <script src="{% static 'robot/custom/CodeHub/js/highlight.pack.js' %}"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+{% endblock %}
+
+{% block ext_js %}
+    <script src="{% static 'robot/custom/CodeHub/js/lineNumbers2.js' %}"></script>
+{% endblock %}
+
+
+{% block content %}
+    <div class="m-portlet m-portlet--mobile">
+        <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <h3 class="m-portlet__head-text">
+                        <a href="#" class="m-link m--font-boldest">
+                            {{ code.author|title }}
+                        </a>
+                        <small>
+                            pasted at {{ code.paste_time|date:"Y-m-d H:i:s" }}
+                            <a href="{% url 'ch_raw' code.id %}" class="m-link m--font-bold">
+                                <i> raw </i>
+                            </a>
+                        </small>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <div class="m-portlet__body blk">
+            <pre><code class="{{ code.language }}" id="code">{{ code.code }}</code></pre>
+            {{ code.get_language_display }}
+        </div>
+    </div>
+{% endblock %}

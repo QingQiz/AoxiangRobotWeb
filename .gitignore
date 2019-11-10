@@ -4,3 +4,4 @@ __pycache__
 .idea
 
 /static
+Hash_salt

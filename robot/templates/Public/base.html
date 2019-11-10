@@ -132,6 +132,7 @@
                             id="m_aside_header_menu_mobile_close_btn">
                         <i class="la la-close"></i>
                     </button>
+
                     <div id="m_header_menu"
                          class="m-header-menu m-aside-header-menu-mobile m-aside-header-menu-mobile--offcanvas  m-header-menu--skin-light m-header-menu--submenu-skin-light m-aside-header-menu-mobile--skin-light m-aside-header-menu-mobile--submenu-skin-dark ">
                         <ul class="m-menu__nav  m-menu__nav--submenu-arrow ">
@@ -200,7 +201,7 @@
                                                 <ul class="m-menu__inner">
                                                     <li class="m-menu__item " m-menu-link-redirect="1"
                                                         aria-haspopup="true">
-                                                        <a href="{% url "Login" %}" class="m-menu__link ">
+                                                        <a href="{% url "ax_Login" %}" class="m-menu__link ">
                                                             <i class="m-menu__link-icon flaticon-map"></i>
                                                             <span class="m-menu__link-text">
                                                                 登陆
@@ -218,7 +219,7 @@
                                                 </h3>
                                                 <ul class="m-menu__inner">
                                                     <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-                                                        <a href="{% url "Grade" %}" class="m-menu__link ">
+                                                        <a href="{% url "ax_Grade" %}" class="m-menu__link ">
                                                             <i class="m-menu__link-bullet m-menu__link-bullet--line">
                                                                 <span></span>
                                                             </i>
@@ -228,7 +229,7 @@
                                                         </a>
                                                     </li>
                                                     <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-                                                        <a href="{% url "CT" %}" class="m-menu__link ">
+                                                        <a href="{% url "ax_CT" %}" class="m-menu__link ">
                                                             <i class="m-menu__link-bullet m-menu__link-bullet--line">
                                                                 <span></span>
                                                             </i>
@@ -277,6 +278,7 @@
                             </li>
                         </ul>
                     </div>
+
                     {% block user_section %}
                     <div id="m_header_topbar" class="m-topbar  m-stack m-stack--ver m-stack--general m-stack--fluid">
                         <div class="m-stack__item m-topbar__nav-wrapper">
