@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import uuid
 from django.db import models
 
 
 class Code(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     LANGUAGE = [
+        'auto',
         'plaintext',
         'apache',
         'bash',
