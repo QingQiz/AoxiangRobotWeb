@@ -40,6 +40,14 @@
 
 {% block ext_js %}
     <script src="{% static 'robot/custom/CodeHub/js/lineNumbers2.js' %}"></script>
+    <script>
+        $('#code_delete_cancel').click(function () {
+            $('#remove_code').click()
+        });
+        $('#code_delete_confirm').click(function () {
+            location.replace('{% url 'ch_d' code.id %}')
+        });
+    </script>
 {% endblock %}
 
 
@@ -65,12 +73,15 @@
             <div class="m-portlet__head-tools">
                 <ul class="m-portlet__nav">
                     <li class="m-portlet__nav-item">
-                        <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" m-dropdown-toggle="hover" aria-expanded="true">
-                            <a href="#" class="m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn--icon m-btn--icon-only m-btn--pill  m-dropdown__toggle">
+                        <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push"
+                             m-dropdown-toggle="hover" aria-expanded="true">
+                            <a href="#"
+                               class="m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn--icon m-btn--icon-only m-btn--pill  m-dropdown__toggle">
                                 <i class="la la-ellipsis-h m--font-brand"></i>
                             </a>
                             <div class="m-dropdown__wrapper" style="z-index: 101;">
-                                <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust" style="left: auto; right: 21.5px;"></span>
+                                <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"
+                                      style="left: auto; right: 21.5px;"></span>
                                 <div class="m-dropdown__inner">
                                     <div class="m-dropdown__body">
                                         <div class="m-dropdown__content">
@@ -96,14 +107,16 @@
                                                         </span>
                                                     </a>
                                                 </li>
+                                                {% if remove != '' %}
                                                 <li class="m-nav__item">
-                                                    <a href="#" class="m-nav__link" id="remove_code">
+                                                    <a href="#" class="m-nav__link" id="remove_code" data-toggle="modal" data-target="#m_modal_5">
                                                         <i class="m-nav__link-icon flaticon-delete-1"></i>
                                                         <span class="m-nav__link-text">
                                                             Remove
                                                         </span>
                                                     </a>
                                                 </li>
+                                                {% endif %}
                                             </ul>
                                         </div>
                                     </div>
@@ -115,8 +128,32 @@
             </div>
         </div>
         <div class="m-portlet__body blk">
-            <pre><code class="{{ code.language }}" id="code" style="background-color: white;">{{ code.code }}</code></pre>
+            <pre><code class="{{ code.language }}" id="code"
+                       style="background-color: white;">{{ code.code }}</code></pre>
             {{ code.get_language_display }}
+        </div>
+    </div>
+    <div class="modal fade" id="m_modal_5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content" style="border-radius: 30px">
+                <div class="m-alert m-alert--icon alert alert-warning" role="alert" style="margin: 0; border-radius: 20px">
+                    <div class="m-alert__icon">
+                        <i class="flaticon-danger"></i>
+                    </div>
+                    <div class="m-alert__text">
+                        <strong> WARNING!! &nbsp; Confirm ?</strong><br>
+                        <div class="m-alert__actions" style="width: 200px;">
+                            <button type="button" class="btn btn-danger btn-sm m-btn m-btn--pill m-btn--wide" id="code_delete_confirm" style="margin-right: 15px">
+                                Yes
+                            </button>
+                            <button type="button" class="btn btn-accent btn-sm m-btn m-btn--pill m-btn--wide" id="code_delete_cancel">
+                                No
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

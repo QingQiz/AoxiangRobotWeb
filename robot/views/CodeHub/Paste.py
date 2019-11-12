@@ -3,6 +3,7 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from robot.models.CodeHub.Code import Code
 from django.conf import settings
+from django.http import HttpResponseRedirect
 import hashlib
 
 
@@ -76,7 +77,10 @@ def codeview(request, codeid):
     code = get_object_or_404(Code, id=codeid)
 
     if code.password == password:
-        return render(request, 'CodeHub/CodeView.html', {'code': code})
+        return render(request, 'CodeHub/CodeView.html', {
+            'code': code,
+            'remove': '' if password == '' else '1'
+        })
     else:
         return authorization(request, codeid)
 
@@ -88,11 +92,35 @@ def delete(request, codeid):
     code = get_object_or_404(Code, id=codeid)
 
     if code.password == password:
-        code.delete()
-        return list_all(request)
+        if code.password != '':
+            code.delete()
+        return redirect(list_all)
     else:
         return authorization(request, codeid)
 
 
 def authorization(request, codeid):
-    return list_all(request)
+    password = request.COOKIES.get(codeid)
+    password = '' if password is None else password
+
+    code = get_object_or_404(Code, id=codeid)
+
+    if code.password == password:
+        resp = HttpResponseRedirect(request.path_info)
+        if password != '':
+            resp.set_cookie(key=codeid, value=password)
+        return resp
+
+    password = request.POST.get('password')
+    password = '' if password is None else password
+    if password != '':
+        password = hashlib.sha1((password + settings.CODEHUB_HASH_SALT).encode()).hexdigest()
+
+    if code.password == password:
+        resp = HttpResponseRedirect(request.path_info)
+        if password != '':
+            resp.set_cookie(key=codeid, value=password)
+        return resp
+
+    return render(request, 'CodeHub/auth.html')
+

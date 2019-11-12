@@ -33,7 +33,9 @@
             <div class="m-portlet__head-caption">
                 <div class="m-portlet__head-title">
                     <h3 class="m-portlet__head-text">
-                        Index
+                        <a class="m-link m--font-boldest" href="{% url 'ch_list' %}">
+                            Index
+                        </a>
                         <small>
                             All The Code is Here
                         </small>
@@ -62,13 +64,13 @@
                                         {{ code.author|title }}
                                     </a>
                                     {% if code.language != '' %}
-                                        <span class="m-badge m-badge--accent m-badge--wide">
+                                        <small>
                                             {{ code.language }}
-                                        </span>
+                                        </small>
                                     {% else %}
-                                        <span class="m-badge m-badge--success m-badge--wide">
+                                        <small>
                                             auto
-                                        </span>
+                                        </small>
                                     {% endif %}
                                 </span>
                                 <span class="m-list-timeline__time"> {{ code.paste_time|date:"Y-m-d H:i:s" }}</span>
