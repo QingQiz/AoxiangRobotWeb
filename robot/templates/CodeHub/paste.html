@@ -34,6 +34,13 @@
                     </span>
                     <h3 class="m-portlet__head-text">
                         Paste &amp; Share Your Code
+                        <small>
+                            <a href="{% url 'ch_list' %}" class="m-link m--font-bold">
+                                <i>
+                                    Index
+                                </i>
+                            </a>
+                        </small>
                     </h3>
                 </div>
             </div>
@@ -42,7 +49,7 @@
             {% csrf_token %}
             <div class="m-portlet__body">
                 <div class="form-group m-form__group">
-                    <label for="exampleInputEmail1">
+                    <label>
                         Author Name
                     </label>
                     <input name="author" class="form-control m-input m-input--solid" placeholder="Author Name" maxlength="30">
@@ -92,6 +99,15 @@
                     </label>
                     <textarea name='code' class="form-control m-input m-input--solid" rows="20"></textarea>
                 </div>
+            </div>
+            <div class="form-group m-form__group">
+                <label>
+                    Password
+                </label>
+                <input name="password" class="form-control m-input m-input--solid" placeholder="Password" maxlength="30" type="password">
+                <span class="m-form__help">
+                    Leave blank to allow access by everyone
+                </span>
             </div>
             <div class="m-portlet__foot m-portlet__foot--fit">
                 <div class="m-form__actions">
