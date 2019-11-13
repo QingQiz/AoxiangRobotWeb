@@ -1,0 +1,5 @@
+[client]
+database = codehub
+user = root
+password = 
+default-charactor-set = utf-8
