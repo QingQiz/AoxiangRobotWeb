@@ -10,6 +10,11 @@
 {% endblock %}
 
 {% block ext_js %}
+    <script>
+        $('#submit-btn').click(function () {
+            $('#submit-btn').css('pointer-events', 'none');
+        });
+    </script>
 {% endblock %}
 
 {% block ext_header %}
@@ -111,7 +116,7 @@
             </div>
             <div class="m-portlet__foot m-portlet__foot--fit">
                 <div class="m-form__actions">
-                    <button type="submit" class="btn btn-success">
+                    <button type="submit" class="btn btn-success" id="submit-btn">
                         Submit
                     </button>
                     <button type="reset" class="btn btn-secondary">

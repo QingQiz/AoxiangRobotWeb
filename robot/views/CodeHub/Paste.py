@@ -92,8 +92,10 @@ def delete(request, codeid):
     code = get_object_or_404(Code, id=codeid)
 
     if code.password == password:
+        resp = redirect(list_all)
         if code.password != '':
             code.delete()
+            resp.delete_cookie(codeid)
         return redirect(list_all)
     else:
         return authorization(request, codeid)
@@ -123,4 +125,5 @@ def authorization(request, codeid):
         return resp
 
     return render(request, 'CodeHub/auth.html')
+
 
