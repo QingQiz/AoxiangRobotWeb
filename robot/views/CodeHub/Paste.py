@@ -2,9 +2,8 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import get_object_or_404, render, redirect
 from robot.models.CodeHub.Code import Code
-from django.conf import settings
 from django.http import HttpResponseRedirect
-import hashlib
+from robot.apis.public import password as pwd
 
 
 def list_all(request):
@@ -49,7 +48,7 @@ def paste(request):
     if password == '':
         code.password = ''
     else:
-        code.password = hashlib.sha1((password + settings.CODEHUB_HASH_SALT).encode()).hexdigest()
+        code.password = pwd.password_hash(password)
     code.save()
 
     response = redirect(codeview, codeid=code.id)
@@ -116,7 +115,7 @@ def authorization(request, codeid):
     password = request.POST.get('password')
     password = '' if password is None else password
     if password != '':
-        password = hashlib.sha1((password + settings.CODEHUB_HASH_SALT).encode()).hexdigest()
+        password = pwd.password_hash(password)
 
     if code.password == password:
         resp = HttpResponseRedirect(request.path_info)

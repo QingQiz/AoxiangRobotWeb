@@ -1,6 +1,6 @@
 from django.urls import path, include
 from robot.views.Public import index, error
-from robot.sub_urls import ax_urls, ch_urls
+from robot.sub_urls import ax_urls, ch_urls, blog_urls
 
 urlpatterns = [
     path('', index.index, name='Index'),
@@ -11,5 +11,6 @@ urlpatterns = [
     path('error/500', error.e500, name="500"),
 
     path('ax/', include(ax_urls)),
-    path('ch/', include(ch_urls))
+    path('ch/', include(ch_urls)),
+    path('blog/', include(blog_urls))
 ]

@@ -1,9 +1,7 @@
 import json
-import binascii
 from django.http import HttpResponse
-from django.conf import settings
 from robot.lib.AoxiangRobot.functions import AoxiangInfo
-from robot.lib.AES_CBC import AESCipher as AES
+from robot.apis.public import password as passwd
 
 
 def check(request):
@@ -11,18 +9,17 @@ def check(request):
     password = request.POST['password']
     try:
         AoxiangInfo.check(username, password)
-        res = AES(settings.SECRET_KEY).encrypt(username + password)
+        res = passwd.encrypt(username+password)
     except ValueError:
         res = -1
     return HttpResponse(json.dumps({'info': res}), content_type='application/json')
 
 
 def username_password(up):
-    try:
-        res = AES(settings.SECRET_KEY).decrypt(up)
-        return res[0:10], res[10:]
-    except (binascii.Error, ValueError, TypeError):
+    res = passwd.decrypt(up)
+    if res is None:
         return None
+    return res[0:10], res[10:]
 
 
 def check_cookies(request):

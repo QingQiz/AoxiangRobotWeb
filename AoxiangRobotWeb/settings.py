@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = open(os.path.join(BASE_DIR, 'sec_key')).read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -49,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
 
 ROOT_URLCONF = 'AoxiangRobotWeb.urls'
 
@@ -127,8 +128,4 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-
-# settings for app
-CODEHUB_ADMIN = '8a52b7671c121c35ea3f2d0b5f434b8bf09dc871'
-CODEHUB_HASH_SALT = open(os.path.join(BASE_DIR, 'Hash_salt')).read().strip()
 
