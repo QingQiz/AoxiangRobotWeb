@@ -1,0 +1,405 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+    <meta name="description" content="Initialized with local json data">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="{% static 'dashboard/static/vendors/base/vendors.bundle.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'dashboard/static/demo/default/base/style.bundle.css' %}" rel="stylesheet" type="text/css">
+    <link rel="{% static 'dashboard/static/demo/default/media/img/logo/favicon.ico' %}">
+    <style type="text/css">
+        @keyframes blink {
+            from, to {
+                border-right-color: black;
+            }
+            50% {
+                border-right-color: transparent;
+            }
+        }
+
+        @-webkit-keyframes blink {
+            from, to {
+                border-right-color: black;
+            }
+            50% {
+                border-right-color: transparent;
+            }
+        }
+
+        div.im-colormask > input {
+            position: absolute;
+            display: inline-block;
+            background-color: transparent;
+            color: transparent;
+            -webkit-appearance: caret;
+            -moz-appearance: caret;
+            border-style: none;
+            left: 0; /*calculated*/
+        }
+
+        div.im-colormask > input:focus {
+            outline: none;
+        }
+
+        div.im-colormask > input::-moz-selection {
+            background: none;
+        }
+
+        div.im-colormask > input::selection {
+            background: none;
+        }
+
+        div.im-colormask > input::-moz-selection {
+            background: none;
+        }
+
+        div.im-colormask > div {
+            color: black;
+            display: inline-block;
+            width: 100px;
+        }
+    </style>
+    <style type="text/css">
+        @-webkit-keyframes chartjs-render-animation {
+            from {
+                opacity: 0.99
+            }
+            to {
+                opacity: 1
+            }
+        }
+
+        @keyframes chartjs-render-animation {
+            from {
+                opacity: 0.99
+            }
+            to {
+                opacity: 1
+            }
+        }
+    </style>
+    <style type="text/css">
+        .sb_safari {
+            height: unset !important;
+        }
+        .fk_safari * {
+            height: unset !important;
+        }
+    </style>
+    {% block ext_header %}
+    {% endblock %}
+</head>
+<body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
+<div class="m-grid m-grid--hor m-grid--root m-page">
+    <header id="m_header" class="m-grid__item    m-header shadow-sm" m-minimize-offset="200" m-minimize-mobile-offset="200">
+        <div class="m-container m-container--fluid m-container--full-height">
+            <div class="m-stack m-stack--ver m-stack--desktop">
+                <div class="m-stack__item m-brand  m-brand--skin-light">
+                    <div class="m-stack m-stack--ver m-stack--general">
+                        <div class="m-stack__item m-stack__item--middle m-brand__logo">
+                            <a href="{% url 'Index' %}" class="m-brand__logo-wrapper">
+                                <img src="{% static 'dashboard/static/demo/default/media/img/logo/logo_default_light.png' %}">
+                            </a>
+                        </div>
+                        <div class="m-stack__item m-stack__item--middle m-brand__tools">
+                            <a href="javascript:;" id="m_aside_left_minimize_toggle"
+                               class="m-brand__icon m-brand__toggler m-brand__toggler--left m--visible-desktop-inline-block">
+                                <span></span>
+                            </a>
+                            <a href="javascript:;" id="m_aside_left_offcanvas_toggle"
+                               class="m-brand__icon m-brand__toggler m-brand__toggler--left m--visible-tablet-and-mobile-inline-block">
+                                <span></span>
+                            </a>
+                            <a id="m_aside_header_menu_mobile_toggle" href="javascript:;"
+                               class="m-brand__icon m-brand__toggler m--visible-tablet-and-mobile-inline-block">
+                                <span></span>
+                            </a>
+                            <a id="m_aside_header_topbar_mobile_toggle" href="javascript:;"
+                               class="m-brand__icon m--visible-tablet-and-mobile-inline-block">
+                                <i class="flaticon-more"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-stack__item m-stack__item--fluid m-header-head m-brand--skin-light" id="m_header_nav"
+                     style="box-shadow: none">
+                    <button class="m-aside-header-menu-mobile-close  m-aside-header-menu-mobile--skin-light"
+                            id="m_aside_header_menu_mobile_close_btn">
+                        <i class="la la-close"></i>
+                    </button>
+{##}
+{#                    <div id="m_header_menu" class="m-header-menu m-aside-header-menu-mobile m-aside-header-menu-mobile--offcanvas  m-header-menu--skin-light m-header-menu--submenu-skin-light m-aside-header-menu-mobile--skin-light m-aside-header-menu-mobile--submenu-skin-dark ">#}
+{#                        <ul class="m-menu__nav  m-menu__nav--submenu-arrow ">#}
+{#                            <li class="m-menu__item  m-menu__item--submenu m-menu__item--rel"#}
+{#                                m-menu-submenu-toggle="click" m-menu-link-redirect="1" aria-haspopup="true">#}
+{#                                <a href="javascript:;" class="m-menu__link m-menu__toggle">#}
+{#                                    <i class="m-menu__link-icon flaticon-add"></i>#}
+{#                                    <span class="m-menu__link-text">#}
+{#                                        Somethings#}
+{#                                    </span>#}
+{#                                    <i class="m-menu__hor-arrow la la-angle-down"></i>#}
+{#                                    <i class="m-menu__ver-arrow la la-angle-right"></i>#}
+{#                                </a>#}
+{#                                <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left">#}
+{#                                    <span class="m-menu__arrow m-menu__arrow--adjust"></span>#}
+{#                                    <ul class="m-menu__subnav">#}
+{#                                        <li class="m-menu__item  m-menu__item--submenu" m-menu-submenu-toggle="hover"#}
+{#                                            m-menu-link-redirect="1" aria-haspopup="true">#}
+{#                                            <a href="javascript:;" class="m-menu__link m-menu__toggle">#}
+{#                                                <i class="m-menu__link-icon flaticon-business"></i>#}
+{#                                                <span class="m-menu__link-text">#}
+{#                                                    asdasd#}
+{#                                                </span>#}
+{#                                                <i class="m-menu__hor-arrow la la-angle-right"></i>#}
+{#                                                <i class="m-menu__ver-arrow la la-angle-right"></i>#}
+{#                                            </a>#}
+{#                                            <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--right">#}
+{#                                                <span class="m-menu__arrow "></span>#}
+{#                                                <ul class="m-menu__subnav">#}
+{#                                                    <li class="m-menu__item " m-menu-link-redirect="1"#}
+{#                                                        aria-haspopup="true">#}
+{#                                                        <a href="" class="m-menu__link ">#}
+{#                                                            <span class="m-menu__link-text">#}
+{#                                                                qweqwe#}
+{#                                                            </span>#}
+{#                                                        </a>#}
+{#                                                    </li>#}
+{#                                                </ul>#}
+{#                                            </div>#}
+{#                                        </li>#}
+{#                                    </ul>#}
+{#                                </div>#}
+{#                            </li>#}
+{#                            <li class="m-menu__item  m-menu__item--submenu m-menu__item--rel"#}
+{#                                m-menu-submenu-toggle="click" m-menu-link-redirect="1" aria-haspopup="true">#}
+{#                                <a href="javascript:;" class="m-menu__link m-menu__toggle">#}
+{#                                    <i class="m-menu__link-icon flaticon-line-graph"></i>#}
+{#                                    <span class="m-menu__link-text">#}
+{#                                        Actions#}
+{#                                    </span>#}
+{#                                    <i class="m-menu__hor-arrow la la-angle-down"></i>#}
+{#                                    <i class="m-menu__ver-arrow la la-angle-right"></i>#}
+{#                                </a>#}
+{#                                <div class="m-menu__submenu  m-menu__submenu--fixed m-menu__submenu--left"#}
+{#                                     style="width:1000px">#}
+{#                                    <span class="m-menu__arrow m-menu__arrow--adjust"></span>#}
+{#                                    <div class="m-menu__subnav">#}
+{#                                        <ul class="m-menu__content">#}
+{#                                            <li class="m-menu__item">#}
+{#                                                <h3 class="m-menu__heading m-menu__toggle">#}
+{#                                                    <span class="m-menu__link-text">#}
+{#                                                        User Actions#}
+{#                                                    </span>#}
+{#                                                    <i class="m-menu__ver-arrow la la-angle-right"></i>#}
+{#                                                </h3>#}
+{#                                                <ul class="m-menu__inner">#}
+{#                                                    <li class="m-menu__item " m-menu-link-redirect="1"#}
+{#                                                        aria-haspopup="true">#}
+{#                                                        <a href="{% url "ax_Login" %}" class="m-menu__link ">#}
+{#                                                            <i class="m-menu__link-icon flaticon-map"></i>#}
+{#                                                            <span class="m-menu__link-text">#}
+{#                                                                登陆#}
+{#                                                            </span>#}
+{#                                                        </a>#}
+{#                                                    </li>#}
+{#                                                </ul>#}
+{#                                            </li>#}
+{#                                            <li class="m-menu__item">#}
+{#                                                <h3 class="m-menu__heading m-menu__toggle">#}
+{#                                                    <span class="m-menu__link-text">#}
+{#                                                        Aoxiang Actions#}
+{#                                                    </span>#}
+{#                                                    <i class="m-menu__ver-arrow la la-angle-right"></i>#}
+{#                                                </h3>#}
+{#                                                <ul class="m-menu__inner">#}
+{#                                                    <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">#}
+{#                                                        <a href="{% url "ax_Grade" %}" class="m-menu__link ">#}
+{#                                                            <i class="m-menu__link-bullet m-menu__link-bullet--line">#}
+{#                                                                <span></span>#}
+{#                                                            </i>#}
+{#                                                            <span class="m-menu__link-text">#}
+{#                                                                考试成绩#}
+{#                                                            </span>#}
+{#                                                        </a>#}
+{#                                                    </li>#}
+{#                                                    <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">#}
+{#                                                        <a href="{% url "ax_CT" %}" class="m-menu__link ">#}
+{#                                                            <i class="m-menu__link-bullet m-menu__link-bullet--line">#}
+{#                                                                <span></span>#}
+{#                                                            </i>#}
+{#                                                            <span class="m-menu__link-text">#}
+{#                                                                课程表#}
+{#                                                            </span>#}
+{#                                                        </a>#}
+{#                                                    </li>#}
+{#                                                </ul>#}
+{#                                            </li>#}
+{#                                            <li class="m-menu__item">#}
+{#                                                <h3 class="m-menu__heading m-menu__toggle">#}
+{#                                                    <span class="m-menu__link-text">#}
+{#                                                        Other Actions#}
+{#                                                    </span>#}
+{#                                                    <i class="m-menu__ver-arrow la la-angle-right"></i>#}
+{#                                                </h3>#}
+{#                                                <ul class="m-menu__inner">#}
+{#                                                    <li class="m-menu__item " m-menu-link-redirect="1"#}
+{#                                                        aria-haspopup="true">#}
+{#                                                        <a href="{% static "cyberchef/cyberchef.html" %}" class="m-menu__link ">#}
+{#                                                            <i class="m-menu__link-bullet m-menu__link-bullet--dot">#}
+{#                                                                <span></span>#}
+{#                                                            </i>#}
+{#                                                            <span class="m-menu__link-text">#}
+{#                                                                CyberChef#}
+{#                                                            </span>#}
+{#                                                        </a>#}
+{#                                                    </li>#}
+{#                                                    <li class="m-menu__item " m-menu-link-redirect="1"#}
+{#                                                        aria-haspopup="true">#}
+{#                                                        <a href="{% url "Error" %}" class="m-menu__link ">#}
+{#                                                            <i class="m-menu__link-bullet m-menu__link-bullet--dot">#}
+{#                                                                <span></span>#}
+{#                                                            </i>#}
+{#                                                            <span class="m-menu__link-text">#}
+{#                                                                Error#}
+{#                                                            </span>#}
+{#                                                        </a>#}
+{#                                                    </li>#}
+{#                                                </ul>#}
+{#                                            </li>#}
+{#                                        </ul>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </li>#}
+{#                        </ul>#}
+{#                    </div>#}
+
+                    {% block user_section %}
+                    <div id="m_header_topbar" class="m-topbar  m-stack m-stack--ver m-stack--general m-stack--fluid">
+                        <div class="m-stack__item m-topbar__nav-wrapper">
+                            <ul class="m-topbar__nav m-nav m-nav--inline">
+                                <li class="m-nav__item m-topbar__user-profile m-topbar__user-profile--img  m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--header-bg-fill m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light"
+                                    m-dropdown-toggle="click">
+                                    <a href="#" class="m-nav__link m-dropdown__toggle">
+                                        <span class="m-topbar__userpic">
+                                            <img src="{% static 'dashboard/static/custom/img/uimg.png' %}" class="m--img-rounded m--marginless m--img-centered" alt="">
+                                        </span>
+                                        <span class="m-topbar__username m--hide">
+
+                                        </span>
+                                    </a>
+                                    <div class="m-dropdown__wrapper">
+                                        <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
+                                        <div class="m-dropdown__inner">
+                                            <div class="m-dropdown__header m--align-center" style="background: url({% static "dashboard/static/app/media/img/misc/user_profile_bg.jpg" %}); background-size: cover;">
+                                                <div class="m-card-user m-card-user--skin-dark">
+                                                    <div class="m-card-user__pic">
+                                                        <img src="{% block user_image %}{% static 'dashboard/static/custom/img/uimg.png' %}{% endblock %}" class="m--img-rounded m--marginless" alt="">
+                                                    </div>
+                                                    <div class="m-card-user__details">
+                                                        <span class="m-card-user__name m--font-weight-500" id="header--user-name">
+                                                            {% block user_name %} 你的名字 {% endblock %}
+                                                        </span>
+                                                        <a href="" class="m-card-user__email m--font-weight-300 m-link" id="header--user-mail">
+                                                            {% block user_email %}你的邮箱 {% endblock %}
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="m-dropdown__body">
+                                                <div class="m-dropdown__content">
+                                                    <ul class="m-nav m-nav--skin-light">
+                                                        <li class="m-nav__section m--hide">
+                                                            <span class="m-nav__section-text">
+                                                                Section
+                                                            </span>
+                                                        </li>
+                                                        <li class="m-nav__item">
+                                                            <a href="#" class="m-nav__link">
+                                                                <i class="m-nav__link-icon flaticon-info"></i>
+                                                                <span class="m-nav__link-text">
+                                                                    FAQ
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="m-nav__item">
+                                                            <a href="#" class="m-nav__link">
+                                                                <i class="m-nav__link-icon flaticon-lifebuoy"></i>
+                                                                <span class="m-nav__link-text">
+                                                                    Support
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="m-nav__separator m-nav__separator--fit"></li>
+                                                        <li class="m-nav__item">
+                                                            {% block user_logout %}
+                                                            <a href="#" class="btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder" id="user__logout" onclick="document.cookie='up=;path=/'; location.reload();">
+                                                                Logout
+                                                            </a>
+                                                             {% endblock %}
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="m-grid__item m-grid__item--fluid m-wrapper" style="padding: 80px 10px 0 10px; margin-bottom: 80px">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <footer class="m-grid__item	m-footer fk_safari" style="margin-left: 0">
+        <div class="m-container m-container--fluid m-container--full-height m-page__container">
+            <div class="m-stack m-stack--flex-tablet-and-mobile m-stack--ver m-stack--desktop">
+                <div class="m-stack__item m-stack__item--left m-stack__item--middle m-stack__item--last">
+                    <span class="m-footer__copyright">
+                        2019 © AoxiangRobot
+                        <a href="https://github.com/QingQiz" class="m-link">
+                            QingQiz
+                        </a>
+                    </span>
+                </div>
+                <div class="m-stack__item m-stack__item--right m-stack__item--middle m-stack__item--first">
+                    <ul class="m-footer__nav m-nav m-nav--inline m--pull-right">
+                        <li class="m-nav__item">
+                            <a href="#" class="m-nav__link">
+                                <span class="m-nav__link-text">
+                                    About
+                                </span>
+                            </a>
+                        </li>
+                        <li class="m-nav__item m-nav__item">
+                            <a href="https://github.com/QingQiz/AoxiangRobotWeb" class="m-nav__link" data-toggle="m-tooltip" title="" data-placement="left" data-original-title="Support Center">
+                                <i class="m-nav__link-icon flaticon-info m--icon-font-size-lg3"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+<div id="m_scroll_top" class="m-scroll-top">
+    <i class="la la-arrow-up"></i>
+</div>
+{% block base_js %}
+<script src="{% static 'dashboard/static/vendors/base/vendors.bundle.js' %}" type="text/javascript"></script>
+<script src="{% static 'dashboard/static/demo/default/base/scripts.bundle.js' %}" type="text/javascript"></script>
+<script src="{% static 'dashboard/static/demo/default/base/layout.js' %}" type="application/javascript"></script>
+{% endblock %}
+{% block ext_js %}
+{% endblock %}
+</body>
+</html>

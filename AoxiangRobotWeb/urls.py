@@ -14,13 +14,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path, include
-from robot.views.Public import error
+from dashboard.views import *
 
 urlpatterns = [
-    path('', include('robot.urls'))
+    path('', include('dashboard.urls')),
+    path('ax/', include('aoxiang.urls')),
+    path('ch/', include('codehub.urls')),
+    path('blog/', include('blog.urls'))
+
 ]
 
-handler404 = error.e404
-handler500 = error.e500
-handler403 = error.e403
-handler400 = error.e400
+handler404 = e404
+handler500 = e500
+handler403 = e403
+handler400 = e400

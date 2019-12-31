@@ -1,3 +1,3 @@
-[submodule "robot/lib/AoxiangRobot"]
-	path = robot/lib/AoxiangRobot
+[submodule "aoxiang/lib/AoxiangRobot"]
+	path = aoxiang/lib/AoxiangRobot
 	url = https://github.com/QingQiz/AoxiangRobot

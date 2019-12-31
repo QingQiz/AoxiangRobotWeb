@@ -1,0 +1,51 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block user_name %} {{  username }} {% endblock %}
+{% block user_email %} {{ email }} {% endblock %}
+{% block user_logout %}
+    <a href="#" class="btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder" id="user__logout">
+        Logout
+    </a>
+{% endblock %}
+
+{% block user_section %}
+    {% if login != '0' %}
+        {{ block.super }}
+    {% endif %}
+{% endblock %}
+
+{% block ext_js %}
+    {% if login != '0' %}
+        <script type="text/javascript">
+            $('#user__logout').click(function () {
+                $.get('{% url 'blog_api_logout' %}');
+                location.reload();
+                location.reload();
+            });
+        </script>
+    {% endif %}
+{% endblock %}
+
+{% block ext_header %}
+    <style>
+        @font-face {
+            font-family: "DSM";
+            src: url("{% static 'dashboard/static/custom/font/DejaVuSansMono.ttf' %}");
+        }
+
+        span.ch-text {
+        {#font-size: 16px !important;#}
+            font-family: DSM;
+            overflow-x: visible;
+        {#line-height: 20px;#}
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+{% endblock %}
