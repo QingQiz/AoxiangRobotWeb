@@ -3,6 +3,7 @@
 from aoxiang.lib.AoxiangRobot.functions import AoxiangInfo, Grade
 from aoxiang.lib.AoxiangRobot.functions.ClassTable import ClassTable, GetClass
 from dashboard.apis import *
+from aoxiang.models import Grade as g
 
 
 def check(request):
@@ -62,12 +63,16 @@ def get_grade(request):
 
     # request data
     try:
-        res = Grade.get(year + int(term) * 18, username=res[0], password=res[1])[0]
+        ret = Grade.get(year + int(term) * 18, username=res[0], password=res[1])[0]
     except ValueError:
         return ret_json(error=1)
 
+    obj = g.objects.get_or_create(uid=res[0], term=year * 10 + int(term))[0]
+    obj.set_data(ret)
+    obj.save()
+
     # return data
-    return ret_json(obj=res)
+    return ret_json(obj=ret)
 
 
 def get_id(request):
