@@ -28,7 +28,8 @@ def register(request):
     ver.user_id = user
     ver.save()
 
-    send_active_email(to=email, uid=user.id, vid=ver.id)
+    host = f'http{"s" if request.is_secure() else ""}://{request.get_host()}'
+    send_active_email(domain=host, to=email, uid=user.id, vid=ver.id)
 
     return ret_json(success=1)
 
@@ -89,12 +90,11 @@ def logout(request):
     return HttpResponseRedirect('/blog')
 
 
-def send_active_email(to, uid, vid):
-    domain = Settings.objects.get(name='server.domain').value
+def send_active_email(domain, to, uid, vid):
     ver = Verify.objects.get(id=vid)
     ver_key = f'{{"uid":{uid},"key":"{ver.verify_text}"}}'
     ver_key = b64e(ver_key)
 
     mes = build_email(subject='Please Active You Account',
-                      msg=f'https://{domain}/blog/active?key={ver_key}')
+                      msg=f'{domain}/blog/active?key={ver_key}')
     send_mail(to=to, mes=mes)
