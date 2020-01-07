@@ -1,6 +1,6 @@
-sec_key
 __pycache__
 .idea
 
-/static
-Hash_salt
+.static
+.sec_key
+.db.cnf

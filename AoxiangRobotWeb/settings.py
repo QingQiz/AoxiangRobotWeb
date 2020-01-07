@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = open(os.path.join(BASE_DIR, 'sec_key')).read().strip()
+SECRET_KEY = open(os.path.join(BASE_DIR, '.sec_key')).read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -83,7 +83,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
-            'read_default_file': '/opt/AoxiangRobotWeb/db.cnf',
+            'read_default_file': os.path.join(BASE_DIR, '.db.cnf'),
             'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"',
         }
     }
@@ -130,6 +130,6 @@ USE_TZ = True
 #     os.path.join(BASE_DIR, 'robot/static'),
 # ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, '.static')
 STATIC_URL = '/static/'
 
